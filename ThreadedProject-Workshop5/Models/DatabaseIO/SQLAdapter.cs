@@ -18,8 +18,8 @@ using System.Threading.Tasks;
  * You may not include properties that do not correspond to a column name as the method will attempt to pull all properties
  */
 
-namespace SQLdbo {
-    public static class SQLDBO {
+namespace SQLAdapter {
+    public static class SQLAdapter {
         /*
          * Gets a list of the supplied type from the database, allows specifying the query to narrow down the pull results
          * List<T> Outlist: The list of objects passed back by the method, if an exception is encountered, an empty list is passed
