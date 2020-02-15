@@ -18,7 +18,7 @@ namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
         public string AgncyPostal { get; set; }
         public string AgncyCountry { get; set; }
         public string AgncyPhone { get; set; }
-        public List<Agency> agents { get; set; }
+        public List<Agents> agents { get; set; }
 
         public TravelAgency(Agencies a) {
             this.AgencyId = a.AgencyId;
@@ -31,11 +31,9 @@ namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
 
             TravelExpertsDB db = new TravelExpertsDB();
 
-            string query = "select * from Agencies,Agents " +
-                           "where Agencies.AgencyID = " + this.AgencyId + " " +
-                           "and Agencies.AgencyId = Agent.AgencyId ";
-
-            SQLAdapter.SQLAdapter.GetFromDB<Agency>(out List<Agency> o, db, query);
+            string query = "select * from Agents " +
+                           "where Agencies.AgencyID = " + this.AgencyId;
+            SQLAdapter.SQLAdapter.GetFromDB<Agents>(out List<Agents> o, db, query);
             agents = o;
         }
     }

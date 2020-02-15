@@ -61,6 +61,7 @@ namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
                 SQLAdapter.SQLAdapter.GetFromDB<Customers_Rewards>(out List<Customers_Rewards> o, db, query);
                 foreach (Customers_Rewards cr in o) {
                     TravelRewards reward = new TravelRewards(cr);
+                    CustRewards.Add(reward);
                 }
             }
             // Getting Customer's Bookings

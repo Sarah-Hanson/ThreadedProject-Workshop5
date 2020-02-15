@@ -7,7 +7,7 @@ using System.Web;
  * Author: Sarah
  */
 namespace ThreadedProject_Workshop5.Models.DBEntities {
-    public class Agency {
+    public class Agents {
         public string AgentId { get; set; }
         public string AgtFirstName { get; set; }
         public string AgtMiddleInitial { get; set; }
