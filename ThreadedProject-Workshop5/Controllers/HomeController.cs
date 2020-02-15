@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ThreadedProject_Workshop5.Models.DBEntities;
+using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
 /*
  * Framework:Sarah
  */
@@ -26,7 +28,7 @@ namespace ThreadedProject_Workshop5.Controllers {
          * Neel
          */
         public ActionResult Packages() {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Your package page.";
 
             return View();
         }
@@ -34,7 +36,7 @@ namespace ThreadedProject_Workshop5.Controllers {
          * Neel
          */
         public ActionResult Booking() {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Your booking page.";
 
             return View();
         }
@@ -42,13 +44,16 @@ namespace ThreadedProject_Workshop5.Controllers {
          * Sarah
          */
         public ActionResult UserProfile() {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Your profile page.";
 
             return View();
         }
 
-
-
-
-    }
+        public bool isLoggedIn() {
+            return (Session["UserLogin"] != null);
+        }
+        public void logUserIn(Customer UserName) {
+            
+        }
+     }
 }
