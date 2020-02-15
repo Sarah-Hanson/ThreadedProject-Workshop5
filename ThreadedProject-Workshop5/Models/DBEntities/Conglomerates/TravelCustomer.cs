@@ -26,7 +26,7 @@ namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
         public string CustUserName { get; set; }
         public string CustPassword { get; set; }
 
-        public List<TravelRewards> CustRewards { get; set; }
+        public List<TravelReward> CustRewards { get; set; }
         public List<CreditCards> CustCC { get; set; }
         public List<Bookings> CustBookings { get; set; }
 
@@ -60,7 +60,7 @@ namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
                                "where CustomerID = " + this.CustomerID;
                 SQLAdapter.SQLAdapter.GetFromDB<Customers_Rewards>(out List<Customers_Rewards> o, db, query);
                 foreach (Customers_Rewards cr in o) {
-                    TravelRewards reward = new TravelRewards(cr);
+                    TravelReward reward = new TravelReward(cr);
                     CustRewards.Add(reward);
                 }
             }

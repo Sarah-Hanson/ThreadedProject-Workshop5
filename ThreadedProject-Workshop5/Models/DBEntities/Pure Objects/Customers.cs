@@ -10,7 +10,7 @@ using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
 namespace ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects {
     public class Customers {
         public Customers() { }
-        //Converter Constructor in case implicit conversion is unwanted
+        //Converter Constructor
         public Customers(TravelCustomer c) {
             CustomerID = c.CustomerID;
             CustFirstName = c.CustFirstName;
@@ -29,22 +29,7 @@ namespace ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects {
         }
         //Conversion Constructor to allow TravelCustomer to be used as a regular Customers
         public static implicit operator Customers(TravelCustomer tc) {
-            Customers c = new Customers();
-            c.CustomerID = tc.CustomerID;
-            c.CustFirstName = tc.CustFirstName;
-            c.CustLastName = tc.CustLastName;
-            c.CustAddress = tc.CustAddress;
-            c.CustCity = tc.CustCity;
-            c.CustProv = tc.CustProv;
-            c.CustPostal = tc.CustPostal;
-            c.CustCountry = tc.CustCountry;
-            c.CustHomePhone = tc.CustHomePhone;
-            c.CustBusPhone = tc.CustBusPhone;
-            c.CustEmail = tc.CustEmail;
-            c.AgentId = tc.AgentId;
-            c.CustUserName = tc.CustUserName;
-            c.CustPassword = tc.CustPassword;
-            return c;
+            return new Customers(tc);
         }
 
         public int CustomerID { get; set; }

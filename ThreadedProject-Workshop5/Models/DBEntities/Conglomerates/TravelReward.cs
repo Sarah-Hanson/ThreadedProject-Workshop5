@@ -10,14 +10,14 @@ using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
  * db operations to get its own reward type.
  */
 namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
-    public class TravelRewards {
+    public class TravelReward {
         public int CustomerID { get; set; }
         public int RewardID { get; set; }
         public string RwdNumber { get; set; }
 
         public Rewards Reward { get; set; }
 
-        public TravelRewards(Customers_Rewards cr) {
+        public TravelReward(Customers_Rewards cr) {
             CustomerID = cr.CustomerID;
             RewardID = cr.RewardID;
             RwdNumber = cr.RwdNumber;
@@ -27,8 +27,8 @@ namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
             string query = "select * from Rewards " +
                            "where RewardID = " + this.RewardID;
 
-            SQLAdapter.SQLAdapter.GetFromDB<Rewards>(out List<Rewards> o, db, query);
-            if(o.Count >0)Reward = o[0];
+            if (SQLAdapter.SQLAdapter.GetFromDB<Rewards>(out List<Rewards> o, db, query))
+                Reward = o[0];
         }
     }
 }

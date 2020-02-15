@@ -128,8 +128,9 @@
     </Compile>
     <Compile Include="Models\DatabaseIO\TravelExpertsDB.cs" />
     <Compile Include="Models\DBEntities\Conglomerates\TravelAgency.cs" />
+    <Compile Include="Models\DBEntities\Conglomerates\TravelBooking.cs" />
     <Compile Include="Models\DBEntities\Conglomerates\TravelCustomer.cs" />
-    <Compile Include="Models\DBEntities\Conglomerates\TravelRewards.cs" />
+    <Compile Include="Models\DBEntities\Conglomerates\TravelReward.cs" />
     <Compile Include="Models\DBEntities\Pure Objects\Agencies.cs" />
     <Compile Include="Models\DBEntities\Pure Objects\Agents.cs" />
     <Compile Include="Models\DBEntities\Conglomerates\TravelPackage.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Models\DBEntities\Pure Objects\Products.cs" />
     <Compile Include="Models\DatabaseIO\SQLAdapter.cs" />
     <Compile Include="Models\DBEntities\Pure Objects\Rewards.cs" />
+    <Compile Include="Models\DBEntities\Pure Objects\TripTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

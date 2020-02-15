@@ -16,7 +16,6 @@ namespace ThreadedProject_Workshop5.Models {
         private DBO() {
             db = new TravelExpertsDB();
         }
-        private static DBO instance = null;
         public static DBO Instance {
             get {
                 if (instance == null) {
@@ -26,6 +25,7 @@ namespace ThreadedProject_Workshop5.Models {
             }
         }
 
+        private static DBO instance = null;
         private TravelExpertsDB db;
         /*
          * Gets all packages/products and puts them in TravelPackage objects
@@ -72,10 +72,51 @@ namespace ThreadedProject_Workshop5.Models {
             return success;
         }
         /*
-         * Updates the given customer's core details on the DB
+         * Updates the given customer's details,credit cards, bookings and rewardss based on the info
+         * in the given object. The object should be a complete object as blank fields will be updated
+         * to empty entries
          */
-        public bool updateConglomerate(TravelCustomer c) {
-            return SQLAdapter.SQLAdapter.UpdateInDB<Customers>(c, db);
+        public bool UpdateConglomerate(TravelCustomer c) {
+            bool success = SQLAdapter.SQLAdapter.UpdateInDB<Customers>(c, db);
+            foreach (CreditCards cc in c.CustCC) {
+                if (!SQLAdapter.SQLAdapter.UpdateInDB<CreditCards>(cc,db))
+                    success = false;
+            }
+            foreach(TravelReward tr in c.CustRewards) {
+                if (!SQLAdapter.SQLAdapter.UpdateInDB<Customers_Rewards>(tr, db))
+                    success = false;
+            }
+            foreach(Bookings b in c.CustBookings) {
+                if (!SQLAdapter.SQLAdapter.UpdateInDB<Bookings>(b, db)) ;
+            }
+              
+            return success;
+        }
+        /*
+         * Adds a new customer to the database, handling everything but bookings, since those
+         * would be assumed to be empty at the time a new customer is registering, such functionality
+         * will reside in another method.
+         */
+         public bool AddConglomerate(TravelCustomer c) {
+            //Add Customer
+            bool success = SQLAdapter.SQLAdapter.InsertToDB<Customers>(c, db);
+            //Add their creditcards
+            foreach (TravelReward t in c.CustRewards) {
+                if(!SQLAdapter.SQLAdapter.InsertToDB<CreditCards>(c.CustCC, db))
+                    success = false;
+            }
+            //Add their rewards cards
+            foreach (TravelReward t in c.CustRewards)
+                if (!SQLAdapter.SQLAdapter.InsertToDB<Customers_Rewards>(t, db))
+                    success = false;
+            
+            return success;
+        }
+        /*
+         *  Adds a booking to the database
+         */
+        public bool AddtoDB(TravelBooking b) {
+            return SQLAdapter.SQLAdapter.InsertToDB<Bookings>(b,db);
         }
     }
 }
