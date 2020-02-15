@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using ThreadedProject_Workshop5.Models.DBEntities;
 using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
+using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
 /*
 * Author: Sarah
 * Handles composite database interactions by combining different sqlqueries with the SQLAdapter to create meaningful
@@ -12,8 +13,7 @@ using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
 namespace ThreadedProject_Workshop5.Models {
     public class DBO {
         /*
-         * Gets all packages/products and puts them in TravelPackage objects, which have
-         * a combination of the package and the products that belong to that package
+         * Gets all packages/products and puts them in TravelPackage objects
          */
         public bool GetConglomerate(out List<TravelPackage> outlist) {
             List<Packages> packages;
@@ -28,8 +28,7 @@ namespace ThreadedProject_Workshop5.Models {
             return success;
         }
         /*
-         * Gets all agents/agencies and puts them in TravelPackage objects, which have
-         * a combination of the package and the products that belong to that package
+         * Gets all agents/agencies and puts them in TravelPackage objects
          */
         public bool GetConglomerate(out List<TravelAgency> outlist) {
             List<Agencies> agencies;
@@ -44,6 +43,22 @@ namespace ThreadedProject_Workshop5.Models {
             }
             return success;
         }
+        /*
+         * Gets all customers/bookings/creditcards/rewardsPrograms and puts them in 
+         * TravelPackage objects
+         */
+        public bool GetConglomerate(out List<TravelCustomer> outlist) {
+            List<Customers> customers;
+            TravelExpertsDB db = new TravelExpertsDB();
+            outlist = new List<TravelCustomer>();
+            bool success = true;
 
+            SQLAdapter.SQLAdapter.GetFromDB<Customers>(out customers, db);
+            foreach (Customers c in customers) {
+                TravelCustomer tc = new TravelCustomer(c);
+                outlist.Add(tc);
+            }
+            return success;
+        }
     }
 }
