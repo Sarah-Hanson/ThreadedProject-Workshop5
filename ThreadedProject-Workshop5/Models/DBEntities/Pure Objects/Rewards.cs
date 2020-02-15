@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-/*
+﻿/*
  * Sarah
  */
 namespace ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects {

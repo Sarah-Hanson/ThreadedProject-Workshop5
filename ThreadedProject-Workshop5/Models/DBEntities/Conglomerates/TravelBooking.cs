@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
 /*
  * Author: Sarah
@@ -20,16 +18,16 @@ namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
 
         public TravelBooking() { }
         public TravelBooking(Bookings b) {
-            BookingId = b.BookingId;
+            BookingId = b.BookingID;
             BookingDate = b.BookingDate;
             BookingNo = b.BookingNo;
             TravelerCount = b.TravelerCount;
-            CustomerId = b.CustomerId;
-            TripTypeId = b.TripTypeId;
-            PackageId = b.PackageId;
+            CustomerId = b.CustomerID;
+            TripTypeId = b.TripTypeID;
+            PackageId = b.PackageID;
             List<TripTypes> trip = new List<TripTypes>();
             TravelExpertsDB db = new TravelExpertsDB();
-            if(SQLAdapter.SQLAdapter.GetFromDB<TripTypes>(out trip, db))
+            if (SQLAdapter.SQLAdapter.GetFromDB<TripTypes>(out trip, db))
                 tripType = trip[0];
         }
     }

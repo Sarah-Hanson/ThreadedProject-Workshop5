@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
 /*
 * Author Sarah
 */
 namespace ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects {
     public class Bookings {
-        public Bookings() {}
+        public Bookings() { }
         //Converter Constructor
         public Bookings(TravelBooking b) {
             BookingID = b.BookingId;
@@ -19,7 +16,7 @@ namespace ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects {
             CustomerID = b.CustomerId;
             TripTypeID = b.TripTypeId;
             PackageID = b.PackageId;
-    }
+        }
         //Conversion Constructor to allow TravelCustomer to be used as a regular Customers
         public static implicit operator Bookings(TravelBooking tb) {
             return new Bookings(tb);

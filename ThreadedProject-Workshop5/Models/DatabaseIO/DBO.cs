@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using ThreadedProject_Workshop5.Models.DBEntities;
 using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
 using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
@@ -33,7 +30,7 @@ namespace ThreadedProject_Workshop5.Models {
         public bool GetConglomerate(out List<TravelPackage> outlist) {
             List<Packages> packages;
             outlist = new List<TravelPackage>();
-            
+
             bool success = SQLAdapter.SQLAdapter.GetFromDB<Packages>(out packages, db);
             foreach (Packages p in packages) {
                 TravelPackage tp = new TravelPackage(p);
@@ -79,17 +76,18 @@ namespace ThreadedProject_Workshop5.Models {
         public bool UpdateConglomerate(TravelCustomer c) {
             bool success = SQLAdapter.SQLAdapter.UpdateInDB<Customers>(c, db);
             foreach (CreditCards cc in c.CustCC) {
-                if (!SQLAdapter.SQLAdapter.UpdateInDB<CreditCards>(cc,db))
+                if (!SQLAdapter.SQLAdapter.UpdateInDB<CreditCards>(cc, db))
                     success = false;
             }
-            foreach(TravelReward tr in c.CustRewards) {
+            foreach (TravelReward tr in c.CustRewards) {
                 if (!SQLAdapter.SQLAdapter.UpdateInDB<Customers_Rewards>(tr, db))
                     success = false;
             }
-            foreach(Bookings b in c.CustBookings) {
-                if (!SQLAdapter.SQLAdapter.UpdateInDB<Bookings>(b, db)) ;
+            foreach (Bookings b in c.CustBookings) {
+                if (!SQLAdapter.SQLAdapter.UpdateInDB<Bookings>(b, db))
+                    success = false;
             }
-              
+
             return success;
         }
         /*
@@ -97,26 +95,26 @@ namespace ThreadedProject_Workshop5.Models {
          * would be assumed to be empty at the time a new customer is registering, such functionality
          * will reside in another method.
          */
-         public bool AddConglomerate(TravelCustomer c) {
+        public bool AddConglomerate(TravelCustomer c) {
             //Add Customer
             bool success = SQLAdapter.SQLAdapter.InsertToDB<Customers>(c, db);
             //Add their creditcards
             foreach (TravelReward t in c.CustRewards) {
-                if(!SQLAdapter.SQLAdapter.InsertToDB<CreditCards>(c.CustCC, db))
+                if (!SQLAdapter.SQLAdapter.InsertToDB<CreditCards>(c.CustCC, db))
                     success = false;
             }
             //Add their rewards cards
             foreach (TravelReward t in c.CustRewards)
                 if (!SQLAdapter.SQLAdapter.InsertToDB<Customers_Rewards>(t, db))
                     success = false;
-            
+
             return success;
         }
         /*
          *  Adds a booking to the database
          */
         public bool AddtoDB(TravelBooking b) {
-            return SQLAdapter.SQLAdapter.InsertToDB<Bookings>(b,db);
+            return SQLAdapter.SQLAdapter.InsertToDB<Bookings>(b, db);
         }
     }
 }

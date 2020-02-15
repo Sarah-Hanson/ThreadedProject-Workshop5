@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
+﻿using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
 
 /*
  * Author: Sarah
@@ -47,6 +43,6 @@ namespace ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects {
         public string CustUserName { get; set; }
         public string CustPassword { get; set; }
 
-   
+
     }
 }

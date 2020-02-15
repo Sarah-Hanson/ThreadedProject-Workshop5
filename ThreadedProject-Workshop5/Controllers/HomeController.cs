@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using ThreadedProject_Workshop5.Models.DBEntities;
-using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
+﻿using System.Web.Mvc;
 /*
  * Framework:Sarah
  */
@@ -12,12 +6,15 @@ namespace ThreadedProject_Workshop5.Controllers {
     public class HomeController : Controller {
         /*
          *  Brandon
+         *  This page just needs to look pretty and navigate to other pages
          */
         public ActionResult Index() {
             return View();
         }
         /*
          *  Brandon
+         *  Functionality, Use list of agencie with agents to show the contact info for 
+         *  all the agents (preferably with a separate section for each agency)
          */
         public ActionResult Contact() {
             ViewBag.Message = "Your contact page.";
@@ -26,6 +23,8 @@ namespace ThreadedProject_Workshop5.Controllers {
         }
         /*
          * Neel
+         * Display all packages, allow selecting a package to book, or redirecting to 
+         * registration if not logged in
          */
         public ActionResult Packages() {
             ViewBag.Message = "Your package page.";
@@ -34,6 +33,7 @@ namespace ThreadedProject_Workshop5.Controllers {
         }
         /*
          * Neel
+         * Allows a logged in customer to book a vacation
          */
         public ActionResult Booking() {
             ViewBag.Message = "Your booking page.";
@@ -42,6 +42,8 @@ namespace ThreadedProject_Workshop5.Controllers {
         }
         /*
          * Sarah
+         * Allows users to manage their info, credit cards, rewards card and see all their 
+         * bookings with a total owing for all their bookings.
          */
         public ActionResult UserProfile() {
             ViewBag.Message = "Your profile page.";
@@ -49,11 +51,20 @@ namespace ThreadedProject_Workshop5.Controllers {
             return View();
         }
 
-        public bool isLoggedIn() {
+        /*
+         * Author: Sarah
+         * These guys are pretty self-documenting
+         */
+        public bool IsLoggedIn() {
             return (Session["UserLogin"] != null);
         }
-        public void logUserIn(Customer UserName) {
-            
+        public void LogUserIn(string userName) {
+            Session.Add("UserLogin", userName);
         }
-     }
+        public void LogUserOut() {
+            if (!IsLoggedIn()) {
+                Session.Clear();
+            }
+        }
+    }
 }

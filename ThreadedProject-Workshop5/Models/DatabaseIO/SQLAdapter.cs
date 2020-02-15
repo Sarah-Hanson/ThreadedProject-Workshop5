@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
+using System.IO;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 /*
  * Author: Sarah
@@ -17,17 +14,16 @@ using System.Threading.Tasks;
  * Properties: 1 property for each column you would like to pull, name matches column name. The first property must be the primary key and no other values may be identity values.
  * You may not include properties that do not correspond to a column name as the method will attempt to pull all properties
  */
-
 namespace SQLAdapter {
     public static class SQLAdapter {
         /*
          * Gets a list of the supplied type from the database, allows specifying the query to narrow down the pull results
          * List<T> Outlist: The list of objects passed back by the method, if an exception is encountered, an empty list is passed
-         *     SQLDB dbcon: The database connection. Must implement the SQLDB interface
+         *     SQLDB dbcon: The database connection. Must implement the I_SQLDB interface
          * string sqlQuery: Sql query to be run.
          *          return: boolean value to indicate if an error has occurred
          */
-        public static bool GetFromDB<T>(out List<T> outList, SQLDB dbCon, string sqlQuery) where T : class, new() {
+        public static bool GetFromDB<T>(out List<T> outList, I_SQLDB dbCon, string sqlQuery) where T : class, new() {
             outList = new List<T>();
             PropertyInfo[] fields = typeof(T).GetProperties();
 
@@ -58,6 +54,7 @@ namespace SQLAdapter {
                     }
                 }
                 catch (Exception ex) {
+                    LogWriter.Log(ex.Message);
                     outList = new List<T>();
                     return false;
                 }
@@ -71,7 +68,7 @@ namespace SQLAdapter {
          *     SQLDB dbcon: The database connection. Must implement the SQLDB interface
          *          return: boolean value to indicate if an error has occurred
          */
-        public static bool GetFromDB<T>(out List<T> outList, SQLDB dbCon) where T : class, new() {
+        public static bool GetFromDB<T>(out List<T> outList, I_SQLDB dbCon) where T : class, new() {
             outList = new List<T>();
             PropertyInfo[] fields = typeof(T).GetProperties();
             T tableType = new T();
@@ -102,6 +99,7 @@ namespace SQLAdapter {
                     }
                 }
                 catch (Exception ex) {
+                    LogWriter.Log(ex.Message);
                     outList = new List<T>();
                     return false;
                 }
@@ -115,7 +113,7 @@ namespace SQLAdapter {
          *     SQLDB dbcon: The database connection. Must implement the SQLDB interface
          *          return: boolean value to indicate if an error has occurred
          */
-        public static bool InsertToDB<T>(T insertObj, SQLDB dbCon) where T : class, new() {
+        public static bool InsertToDB<T>(T insertObj, I_SQLDB dbCon) where T : class, new() {
             PropertyInfo[] fields = typeof(T).GetProperties();
             T tableType = new T();
             using (SqlConnection dbConnect = dbCon.GetConnection()) {
@@ -155,6 +153,7 @@ namespace SQLAdapter {
                     }
                 }
                 catch (Exception ex) {
+                    LogWriter.Log(ex.Message);
                     return false;
                 }
 
@@ -166,9 +165,9 @@ namespace SQLAdapter {
          *     SQLDB dbcon: The database connection. Must implement the SQLDB interface
          *          return: boolean value to indicate if an error has occurred
          */
-        public static bool InsertToDB<T>(List<T> insertList, SQLDB dbCon) where T : class, new() {
+        public static bool InsertToDB<T>(List<T> insertList, I_SQLDB dbCon) where T : class, new() {
             bool success = true;
-            foreach(T o in insertList) {
+            foreach (T o in insertList) {
                 if (!InsertToDB<T>(o, dbCon))
                     success = false;
             }
@@ -181,7 +180,7 @@ namespace SQLAdapter {
          *     SQLDB dbcon: The database connection. Must implement the SQLDB interface
          *          return: boolean value to indicate if an error has occurred
          */
-        public static bool RemoveFromDB<T>(T deleteObj, SQLDB dbCon) where T : class, new() {
+        public static bool RemoveFromDB<T>(T deleteObj, I_SQLDB dbCon) where T : class, new() {
             PropertyInfo[] fields = typeof(T).GetProperties();
             T tableType = new T();
             using (SqlConnection dbConnect = dbCon.GetConnection()) {
@@ -203,6 +202,7 @@ namespace SQLAdapter {
                     }
                 }
                 catch (Exception ex) {
+                    LogWriter.Log(ex.Message);
                     return false;
                 }
 
@@ -214,7 +214,7 @@ namespace SQLAdapter {
          *     SQLDB dbcon: The database connection. Must implement the SQLDB interface
          *          return: boolean value to indicate if an error has occurred
          */
-        public static bool UpdateInDB<T>(T updatetObj, SQLDB dbCon) where T : class, new() {
+        public static bool UpdateInDB<T>(T updatetObj, I_SQLDB dbCon) where T : class, new() {
             PropertyInfo[] fields = typeof(T).GetProperties();
             T tableType = new T();
             using (SqlConnection dbConnect = dbCon.GetConnection()) {
@@ -241,6 +241,7 @@ namespace SQLAdapter {
                     }
                 }
                 catch (Exception ex) {
+                    LogWriter.Log(ex.Message);
                     return false;
                 }
 
@@ -252,7 +253,7 @@ namespace SQLAdapter {
          *    string query: The SQL query to be executed to update the DB
          *          return: boolean value to indicate if an error has occurred
          */
-        public static bool UpdateInDB<T>(SQLDB dbCon, string query) where T : class, new() {
+        public static bool UpdateInDB<T>(I_SQLDB dbCon, string query) where T : class, new() {
             using (SqlConnection dbConnect = dbCon.GetConnection()) {
                 dbConnect.Open();
                 try {
@@ -263,14 +264,29 @@ namespace SQLAdapter {
                     }
                 }
                 catch (Exception ex) {
+                    LogWriter.Log(ex.Message);
                     return false;
                 }
 
             }
         }
     }
-    public interface SQLDB {
+    public interface I_SQLDB {
         SqlConnection GetConnection();
+    }
+    /*
+     * Shamelessly adapted from the MS docs page for appending to files.
+     */
+    public static class LogWriter {
+        public static void Log(string logMessage) {
+            using (StreamWriter w = File.AppendText("log.txt")) {
+                w.Write("\r\nLog Entry: ");
+                w.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToLongDateString()}");
+                w.WriteLine("  :");
+                w.WriteLine($"  :{logMessage}");
+                w.WriteLine("-------------------------------");
+            }
+        }
     }
 }
 
