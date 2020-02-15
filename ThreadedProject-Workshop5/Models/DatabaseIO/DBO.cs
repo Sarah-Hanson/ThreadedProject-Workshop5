@@ -2,29 +2,46 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using ThreadedProject_Workshop5.Models.DBEntities;
+using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
 /*
- * Author: Sarah
- */
+* Author: Sarah
+*/
 namespace ThreadedProject_Workshop5.Models {
     public class DBO {
         /*
-         * Gets all packages and puts them in TravelPackage objects, which have
+         * Gets all packages/products and puts them in TravelPackage objects, which have
          * a combination of the package and the products that belong to that package
          */
-        public List<TravelPackage> getpackages() {
+        public bool GetConglomerate(out List<TravelPackage> outlist) {
             List<Packages> packages;
             TravelExpertsDB db = new TravelExpertsDB();
-            List<TravelPackage> returnList = new List<TravelPackage>();
+            outlist = new List<TravelPackage>();
+            bool success = SQLAdapter.SQLAdapter.GetFromDB<Packages>(out packages, db);
 
-            SQLAdapter.SQLAdapter.GetFromDB<Packages>(out packages, db);
             foreach (Packages p in packages) {
                 TravelPackage tp = new TravelPackage(p);
-                tp.getProducts();
-                returnList.Add(tp);
+                outlist.Add(tp);
             }
-
-            return returnList;
+            return success;
         }
-        public List<>
+        /*
+         * Gets all agents/agencies and puts them in TravelPackage objects, which have
+         * a combination of the package and the products that belong to that package
+         */
+        public bool GetConglomerate(out List<TravelAgency> outlist) {
+            List<Agencies> agencies;
+            TravelExpertsDB db = new TravelExpertsDB();
+            outlist = new List<TravelAgency>();
+            bool success = true;
+
+            SQLAdapter.SQLAdapter.GetFromDB<Agencies>(out agencies, db);
+            foreach (Agencies a in agencies) {
+                TravelAgency ta = new TravelAgency(a);
+                outlist.Add(ta);
+            }
+            return success;
+        }
+
     }
 }
