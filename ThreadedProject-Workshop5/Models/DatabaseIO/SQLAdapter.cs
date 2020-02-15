@@ -208,6 +208,66 @@ namespace SQLAdapter {
 
             }
         }
+        /*
+         * Updates the passed object in the database, generates query automatically based on object
+         *     T updateObj: The object to be updated, with new values inserted (may not change the PK) 
+         *     SQLDB dbcon: The database connection. Must implement the SQLDB interface
+         *          return: boolean value to indicate if an error has occurred
+         */
+        public static bool UpdateInDB<T>(T updatetObj, SQLDB dbCon) where T : class, new() {
+            PropertyInfo[] fields = typeof(T).GetProperties();
+            T tableType = new T();
+            using (SqlConnection dbConnect = dbCon.GetConnection()) {
+                dbConnect.Open();
+                // Crafting the SQL Query
+                string query = "Update " + tableType.GetType().Name + "Set(";
+                int i = 0;
+                int last = fields.Length - 1;
+                foreach (PropertyInfo prop in fields) {
+                    if (i != 0) { //No updating the PK
+                        query += prop.Name + prop.GetValue(updatetObj);
+                        if (i < last)
+                            query += ", ";//Don't put a comma on the last option
+                    }
+                    i++;
+                }
+                query += ") where " + fields[0].Name + " = " + fields[0].GetValue(updatetObj); //Use Primary key to define which object to update
+                // Running the Query
+                try {
+                    using (SqlCommand cmd = new SqlCommand(query, dbConnect)) {
+                        cmd.ExecuteScalar();
+                        dbConnect.Close();
+                        return true;
+                    }
+                }
+                catch (Exception ex) {
+                    return false;
+                }
+
+            }
+        }
+        /*
+         * Runs an update query on the db, with the caller specifying the query
+         *     SQLDB dbcon: The database connection. Must implement the SQLDB interface
+         *    string query: The SQL query to be executed to update the DB
+         *          return: boolean value to indicate if an error has occurred
+         */
+        public static bool UpdateInDB<T>(SQLDB dbCon, string query) where T : class, new() {
+            using (SqlConnection dbConnect = dbCon.GetConnection()) {
+                dbConnect.Open();
+                try {
+                    using (SqlCommand cmd = new SqlCommand(query, dbConnect)) {
+                        cmd.ExecuteScalar();
+                        dbConnect.Close();
+                        return true;
+                    }
+                }
+                catch (Exception ex) {
+                    return false;
+                }
+
+            }
+        }
     }
     public interface SQLDB {
         SqlConnection GetConnection();

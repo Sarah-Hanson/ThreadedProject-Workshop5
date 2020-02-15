@@ -19,8 +19,8 @@ namespace ThreadedProject_Workshop5.Models {
             List<Packages> packages;
             TravelExpertsDB db = new TravelExpertsDB();
             outlist = new List<TravelPackage>();
+            
             bool success = SQLAdapter.SQLAdapter.GetFromDB<Packages>(out packages, db);
-
             foreach (Packages p in packages) {
                 TravelPackage tp = new TravelPackage(p);
                 outlist.Add(tp);
@@ -36,7 +36,7 @@ namespace ThreadedProject_Workshop5.Models {
             outlist = new List<TravelAgency>();
             bool success = true;
 
-            SQLAdapter.SQLAdapter.GetFromDB<Agencies>(out agencies, db);
+            success = SQLAdapter.SQLAdapter.GetFromDB<Agencies>(out agencies, db);
             foreach (Agencies a in agencies) {
                 TravelAgency ta = new TravelAgency(a);
                 outlist.Add(ta);
@@ -51,13 +51,18 @@ namespace ThreadedProject_Workshop5.Models {
             List<Customers> customers;
             TravelExpertsDB db = new TravelExpertsDB();
             outlist = new List<TravelCustomer>();
-            bool success = true;
 
-            SQLAdapter.SQLAdapter.GetFromDB<Customers>(out customers, db);
+            bool success = SQLAdapter.SQLAdapter.GetFromDB<Customers>(out customers, db);
             foreach (Customers c in customers) {
                 TravelCustomer tc = new TravelCustomer(c);
                 outlist.Add(tc);
             }
+            return success;
+        }
+        
+        public bool updateConglomerate(TravelCustomer c) {
+            TravelExpertsDB db = new TravelExpertsDB();
+            bool success = SQLAdapter.SQLAdapter.UpdateInDB<Customers>(c, db);
             return success;
         }
     }
