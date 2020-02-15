@@ -85,7 +85,7 @@ namespace SQLAdapter {
             return success;
         }
         /*
-         * Gets a specific id # of the given object from the database.
+         * Gets a specific id # of the given object from the database using an int based ID
          *      <T> outObj: The list of objects passed back by the method, if an exception is encountered, an empty list is passed
          *     SQLDB dbcon: The database connection. Must implement the I_SQLDB interface
          *          return: boolean value to indicate if an error has occurred
