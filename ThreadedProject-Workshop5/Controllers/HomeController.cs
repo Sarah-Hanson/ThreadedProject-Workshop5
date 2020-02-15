@@ -46,6 +46,7 @@ namespace ThreadedProject_Workshop5.Controllers {
          * bookings with a total owing for all their bookings.
          */
         public ActionResult UserProfile() {
+
             ViewBag.Message = "Your profile page.";
 
             return View();

@@ -4,8 +4,8 @@ using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
 using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
 /*
 * Author: Sarah
-* Handles composite database interactions by combining different sqlqueries with the SQLAdapter to create meaningful
-* composite objects out of the base DBtable objects. Set up with singleton scheme to save on multiple instantiations
+* Handles composite database interactions by combining different SQL queries with the SQLAdapter to create meaningful
+* composite objects out of the base DB table objects. Set up with singleton scheme to save on multiple instantiations
 */
 namespace ThreadedProject_Workshop5.Models {
     public class DBO {
@@ -24,14 +24,16 @@ namespace ThreadedProject_Workshop5.Models {
 
         private static DBO instance = null;
         private TravelExpertsDB db;
+
         /*
          * Gets all packages/products and puts them in TravelPackage objects
          */
         public bool GetConglomerate(out List<TravelPackage> outlist) {
             List<Packages> packages;
             outlist = new List<TravelPackage>();
+            bool success;
 
-            bool success = SQLAdapter.SQLAdapter.GetFromDB<Packages>(out packages, db);
+            success = SQLAdapter.SQLAdapter.GetFromDB<Packages>(out packages, db);
             foreach (Packages p in packages) {
                 TravelPackage tp = new TravelPackage(p);
                 outlist.Add(tp);
@@ -44,7 +46,7 @@ namespace ThreadedProject_Workshop5.Models {
         public bool GetConglomerate(out List<TravelAgency> outlist) {
             List<Agencies> agencies;
             outlist = new List<TravelAgency>();
-            bool success = true;
+            bool success;
 
             success = SQLAdapter.SQLAdapter.GetFromDB<Agencies>(out agencies, db);
             foreach (Agencies a in agencies) {
@@ -60,8 +62,9 @@ namespace ThreadedProject_Workshop5.Models {
         public bool GetConglomerate(out List<TravelCustomer> outlist) {
             List<Customers> customers;
             outlist = new List<TravelCustomer>();
+            bool success;
 
-            bool success = SQLAdapter.SQLAdapter.GetFromDB<Customers>(out customers, db);
+            success = SQLAdapter.SQLAdapter.GetFromDB<Customers>(out customers, db);
             foreach (Customers c in customers) {
                 TravelCustomer tc = new TravelCustomer(c);
                 outlist.Add(tc);
@@ -69,20 +72,24 @@ namespace ThreadedProject_Workshop5.Models {
             return success;
         }
         /*
-         * Updates the given customer's details,credit cards, bookings and rewardss based on the info
+         * Updates the given customer's details, credit cards, bookings and rewards based on the info
          * in the given object. The object should be a complete object as blank fields will be updated
          * to empty entries
          */
         public bool UpdateConglomerate(TravelCustomer c) {
+            //Update Customer details
             bool success = SQLAdapter.SQLAdapter.UpdateInDB<Customers>(c, db);
+            //Update Credit Card Details
             foreach (CreditCards cc in c.CustCC) {
                 if (!SQLAdapter.SQLAdapter.UpdateInDB<CreditCards>(cc, db))
                     success = false;
             }
+            //Update Reward Details
             foreach (TravelReward tr in c.CustRewards) {
                 if (!SQLAdapter.SQLAdapter.UpdateInDB<Customers_Rewards>(tr, db))
                     success = false;
             }
+            //Update Booking details
             foreach (Bookings b in c.CustBookings) {
                 if (!SQLAdapter.SQLAdapter.UpdateInDB<Bookings>(b, db))
                     success = false;

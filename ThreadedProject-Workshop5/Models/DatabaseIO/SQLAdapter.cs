@@ -63,49 +63,62 @@ namespace SQLAdapter {
             }
         }
         /*
+         * Gets a specific id # of the given object from the database using a string based ID
+         *      <T> outObj: The list of objects passed back by the method, if an exception is encountered, an empty list is passed
+         *     SQLDB dbcon: The database connection. Must implement the I_SQLDB interface
+         *          return: boolean value to indicate if an error has occurred
+         */
+        public static bool GetFromDB<T>(out T outObj, I_SQLDB dbCon, string id) where T : class, new() {
+            bool success;
+            PropertyInfo[] fields = typeof(T).GetProperties();
+
+            string query = "select * from " + typeof(T).Name +
+                           " where " + fields[0].Name + " = \'" + id + "\'";
+            success = GetFromDB<T>(out List<T> outList, dbCon, query);
+            if (outList.Count > 0)
+                outObj = outList[0];
+            else {
+                outObj = new T();
+                success = false;
+            }
+
+            return success;
+        }
+        /*
+         * Gets a specific id # of the given object from the database.
+         *      <T> outObj: The list of objects passed back by the method, if an exception is encountered, an empty list is passed
+         *     SQLDB dbcon: The database connection. Must implement the I_SQLDB interface
+         *          return: boolean value to indicate if an error has occurred
+         */
+        public static bool GetFromDB<T>(out T outObj, I_SQLDB dbCon, int id) where T : class, new() {
+            bool success;
+            PropertyInfo[] fields = typeof(T).GetProperties();
+
+            string query = "select * from " + typeof(T).Name +
+                           " where " + fields[0].Name + " = " + id;
+            success = GetFromDB<T>(out List<T> outList, dbCon, query);
+            if (outList.Count > 0)
+                outObj = outList[0];
+            else {
+                outObj = new T();
+                success = false;
+            }
+
+            return success;
+        }
+        /*
          * Gets a list of the supplied type from the database, automatically generates a "select * " query for the object
          * List<T> Outlist: The list of objects passed back by the method, if an exception is encountered, an empty list is passed
          *     SQLDB dbcon: The database connection. Must implement the SQLDB interface
          *          return: boolean value to indicate if an error has occurred
          */
         public static bool GetFromDB<T>(out List<T> outList, I_SQLDB dbCon) where T : class, new() {
-            outList = new List<T>();
             PropertyInfo[] fields = typeof(T).GetProperties();
             T tableType = new T();
-            using (SqlConnection dbConnect = dbCon.GetConnection()) {
-                dbConnect.Open();
-                string query = "select * from " + tableType.GetType().Name;
-                try {
-                    using (SqlCommand cmd = new SqlCommand(query, dbConnect)) {
-                        //run command and process results
-                        using (SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection)) {
-                            while (reader.Read()) {
-                                T o = new T();
-                                foreach (PropertyInfo prop in fields) {
-                                    if (reader[prop.Name] != DBNull.Value) {
-                                        string column = prop.Name;
-                                        string readO = reader[column].ToString();
-                                        Type propType = prop.PropertyType;
 
-                                        prop.SetValue(o, Convert.ChangeType(readO, propType), null);
-                                    }
-                                    else
-                                        prop.SetValue(o, null, null);
-                                    //prop.SetValue(o, default(), null);
-                                }
-                                outList.Add(o);
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex) {
-                    LogWriter.Log(ex.Message);
-                    outList = new List<T>();
-                    return false;
-                }
-                dbConnect.Close();
-                return true;
-            }
+            string query = "select * from " + tableType.GetType().Name;
+
+            return GetFromDB<T>(out outList, dbCon, query);
         }
         /*
          * Inserts the passed object into the database, generates query automatically based on object
