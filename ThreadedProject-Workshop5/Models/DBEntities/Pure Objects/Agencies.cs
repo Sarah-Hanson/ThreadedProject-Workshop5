@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+/*
+ * Author: Sarah
+ */
 namespace ThreadedProject_Workshop5.Models.DBEntities {
     public class Agencies {
         public string AgencyId { get; set; }

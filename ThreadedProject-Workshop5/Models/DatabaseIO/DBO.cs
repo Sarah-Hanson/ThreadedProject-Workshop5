@@ -6,6 +6,8 @@ using ThreadedProject_Workshop5.Models.DBEntities;
 using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
 /*
 * Author: Sarah
+* Handles composite database interactions by combining different sqlqueries with the SQLAdapter to create meaningful
+* composite objects out of the base DBtable objects.
 */
 namespace ThreadedProject_Workshop5.Models {
     public class DBO {

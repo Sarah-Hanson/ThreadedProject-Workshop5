@@ -6,6 +6,9 @@ using SQLAdapter;
 
 /*
  * Author: Sarah
+ * Conglomerate object of a package from the database with a list of all of that package's products.
+ * Created by passing the constructor a package and it will run the nescessary db operations to 
+ * get its own packages.
  */
 namespace ThreadedProject_Workshop5.Models {
     public class TravelPackage {

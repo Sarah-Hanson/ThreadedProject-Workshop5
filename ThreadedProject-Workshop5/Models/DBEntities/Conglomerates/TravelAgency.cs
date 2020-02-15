@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+/*
+ * Author: Sarah
+ * Conglomerate object of a agency from the database with a list of all of that agency's agents.
+ * Created by passing the constructor an agency and it will run the nescessary db operations to 
+ * get its own agents.
+ */
 namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
     public class TravelAgency {
         public string AgencyId { get; set; }
