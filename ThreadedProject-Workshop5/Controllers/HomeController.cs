@@ -48,19 +48,20 @@ namespace ThreadedProject_Workshop5.Controllers {
          * Neel
          * Allows a logged in customer to book a vacation
          */
-        public ActionResult Booking() {
-            ViewBag.Message = "Your booking page.";
-
-            return View();
+        public ActionResult Booking(TravelBooking book)
+        {
+            dbo.AddtoDB(book);
+            return View(book);
+        }
+        public ActionResult book(TravelBooking model)
+        {
+            return View(model);
         }
         public ActionResult Register() {
             ViewBag.Message = "Your Register Page";
 
-            return View();
+                return View();
         }
-        /*
-         * Sarah
-         */
         public ActionResult UserProfile() {
             if (debug) { LogUserIn("user1"); }
 

@@ -13,6 +13,6 @@ namespace ThreadedProject_Workshop5.Models.DBEntities {
         public string AgtEmail { get; set; }
         public string AgtPosition { get; set; }
         public string AgencyId { get; set; }
-        public string AgtImages { get; set; }
+        public string AgtImage { get; set; }
     }
 }
