@@ -15,11 +15,11 @@
         <h4 class="card-title">@Html.DisplayFor(model => model.AgentId) @Html.DisplayFor(model => model.AgtMiddleInitial) @Html.DisplayFor(model => model.AgtLastName)  </h4>
         <h5 class="card-text">@Html.DisplayFor(model => model.AgtPosition)</h5>
         <hr />
-        <abbr title="Phone">P:</abbr><a href="tel:@Html.DisplayFor(model => model.AgtBusPhone)">@Html.DisplayFor(model => model.AgtBusPhone)</a>
+        <abbr title="Phone">P:</abbr><a href="tel:@Html.DisplayFor(model => model.AgtBusPhone)">@Html.DisplayFor(model => model.AgtBusPhone)</a><br />
         <abbr title="Email">E:</abbr><a href="mailto:@Html.DisplayFor(model => model.AgtEmail)">@Html.DisplayFor(model => model.AgtEmail)</a>
     </div>
 </div>
-@foreach (var item in Model)
+@*@List<Agents> agents;
 {
     <div class="card" style="width: 18rem;height:300px;">
         <img class="card-img-top" src="~/Images/People/@Html.DisplayFor(modelItem => item.AgentId)" + ".png" alt="@Html.DisplayFor(modelItem => item.AgtFirstName)">
@@ -35,4 +35,4 @@
 
 
 
-}
+}*@

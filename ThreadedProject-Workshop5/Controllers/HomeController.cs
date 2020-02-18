@@ -1,19 +1,31 @@
+
 ﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using ThreadedProject_Workshop5.Models;
+using ThreadedProject_Workshop5.Models.DBEntities;
 using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
+
 /*
 * Framework:Sarah
 */
 namespace ThreadedProject_Workshop5.Controllers {
+    
     public class HomeController : Controller {
+
+
+        List<Agents> agents;
+
+
+
         readonly DBO dbo = DBO.Instance;
+
         /*
          *  Brandon
          *  This page just needs to look pretty and navigate to other pages
          */
         public ActionResult Index() {
             return View();
+
         }
         /*
          *  Brandon
@@ -21,7 +33,7 @@ namespace ThreadedProject_Workshop5.Controllers {
          *  all the agents (preferably with a separate section for each agency)
          */
         public ActionResult Contact() {
-          
+            SQLAdapter.SQLAdapter.GetFromDB<Agents>(out agents, new TravelExpertsDB());
             return View();
         }
         /*
@@ -30,20 +42,15 @@ namespace ThreadedProject_Workshop5.Controllers {
          * registration if not logged in
          */
         public ActionResult Packages() {
-            List<TravelPackage> package;
-            dbo.GetConglomerate(out package);
-            ViewBag.User = package;
             ViewBag.Message = "Your package page.";
 
-            return View(package);
+            return View();
         }   
         /*
          * Neel
          * Allows a logged in customer to book a vacation
          */
         public ActionResult Booking() {
-           
-            
             ViewBag.Message = "Your booking page.";
 
             return View();
