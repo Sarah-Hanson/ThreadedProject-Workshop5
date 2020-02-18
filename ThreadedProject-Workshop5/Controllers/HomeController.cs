@@ -50,25 +50,23 @@ namespace ThreadedProject_Workshop5.Controllers {
             dbo.GetConglomerate(out packages);
 
             return View(packages);
-        }   
+        }
         /*
          * Neel
          * Allows a logged in customer to book a vacation
          */
-        public ActionResult Booking() {
-            ViewBag.Message = "Your booking page.";
-
-            return View();
+        public ActionResult Booking(TravelBooking book)
+        {            
+            return View(book);
         }
-        /*
-         * Sarah
-         */
-         public ActionResult Register()
-        {
+            /*
+             * Sarah
+             */
+            public ActionResult Register(){
             ViewBag.Message = "Your Register Page";
 
                 return View();
-        }
+            }
         public ActionResult UserProfile() {
             TravelCustomer travelCust;
             if(debug) {
