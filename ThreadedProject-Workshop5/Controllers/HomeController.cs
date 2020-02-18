@@ -56,8 +56,13 @@ namespace ThreadedProject_Workshop5.Controllers {
          * Allows a logged in customer to book a vacation
          */
         public ActionResult Booking(TravelBooking book)
-        {            
+        {
+            dbo.AddtoDB(book);
             return View(book);
+        }
+        public ActionResult book(TravelBooking model)
+        {
+            return View(model);
         }
             /*
              * Sarah
