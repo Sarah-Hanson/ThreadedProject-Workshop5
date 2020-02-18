@@ -15,16 +15,15 @@ namespace ThreadedProject_Workshop5.Models {
         public DateTime PkgEndDate { get; set; }
         public string PkgDesc { get; set; }
         public decimal PkgBasePrice { get; set; }
-        public decimal PkgAgencyCommission { get; set; }
         public List<Products> products { get; set; }
 
         public TravelPackage(Packages p) {
+            this.PackageID = p.PackageID;
             this.PkgName = p.PkgName;
             this.PkgStartDate = p.PkgStartDate;
             this.PkgEndDate = p.PkgEndDate;
             this.PkgDesc = p.PkgDesc;
             this.PkgBasePrice = p.PkgBasePrice;
-            this.PkgAgencyCommission = p.PkgAgencyCommission;
             TravelExpertsDB db = new TravelExpertsDB();
 
             string query = "select * from Packages, Packages_Products_Suppliers, Products_Suppliers, Products " +

@@ -1,13 +1,25 @@
+
+﻿using System.Collections.Generic;
 ﻿using System.Web.Mvc;
 using ThreadedProject_Workshop5.Models;
+using ThreadedProject_Workshop5.Models.DBEntities;
 using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
+
 /*
 * Framework:Sarah
 */
 namespace ThreadedProject_Workshop5.Controllers {
+    
     public class HomeController : Controller {
+
+
+        List<Agents> agents;
+
+
+
         readonly DBO dbo = DBO.Instance;
         const bool debug = true;
+
 
         /*
          *  Brandon
@@ -15,6 +27,7 @@ namespace ThreadedProject_Workshop5.Controllers {
          */
         public ActionResult Index() {
             return View();
+
         }
         /*
          *  Brandon
@@ -22,7 +35,7 @@ namespace ThreadedProject_Workshop5.Controllers {
          *  all the agents (preferably with a separate section for each agency)
          */
         public ActionResult Contact() {
-          
+            SQLAdapter.SQLAdapter.GetFromDB<Agents>(out agents, new TravelExpertsDB());
             return View();
         }
         /*
@@ -32,8 +45,10 @@ namespace ThreadedProject_Workshop5.Controllers {
          */
         public ActionResult Packages() {
             ViewBag.Message = "Your package page.";
+            List<TravelPackage> packages;
+            dbo.GetConglomerate(out packages);
 
-            return View();
+            return View(packages);
         }   
         /*
          * Neel
