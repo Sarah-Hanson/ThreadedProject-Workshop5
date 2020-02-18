@@ -1,7 +1,10 @@
+
 ﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using ThreadedProject_Workshop5.Models;
 using ThreadedProject_Workshop5.Models.DBEntities;
+using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
+
 /*
 * Framework:Sarah
 */
@@ -9,8 +12,12 @@ namespace ThreadedProject_Workshop5.Controllers {
     
     public class HomeController : Controller {
 
+
         List<Agents> agents;
 
+
+
+        readonly DBO dbo = DBO.Instance;
 
         /*
          *  Brandon
@@ -38,16 +45,11 @@ namespace ThreadedProject_Workshop5.Controllers {
             ViewBag.Message = "Your package page.";
 
             return View();
-        }
-        
-        
-        
+        }   
         /*
          * Neel
          * Allows a logged in customer to book a vacation
          */
-
-
         public ActionResult Booking() {
             ViewBag.Message = "Your booking page.";
 
@@ -55,8 +57,6 @@ namespace ThreadedProject_Workshop5.Controllers {
         }
         /*
          * Sarah
-         * Allows users to manage their info, credit cards, rewards card and see all their 
-         * bookings with a total owing for all their bookings.
          */
          public ActionResult Register()
         {
@@ -65,7 +65,10 @@ namespace ThreadedProject_Workshop5.Controllers {
                 return View();
         }
         public ActionResult UserProfile() {
+            TravelCustomer travelCust;
+            dbo.GetConglomerate(out travelCust, Session["UserLogin"].ToString());
 
+            ViewBag.User = travelCust;
             ViewBag.Message = "Your profile page.";
 
             return View();
