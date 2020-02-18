@@ -1,15 +1,24 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
+using ThreadedProject_Workshop5.Models;
+using ThreadedProject_Workshop5.Models.DBEntities;
 /*
- * Framework:Sarah
- */
+* Framework:Sarah
+*/
 namespace ThreadedProject_Workshop5.Controllers {
+    
     public class HomeController : Controller {
+
+        List<Agents> agents;
+
+
         /*
          *  Brandon
          *  This page just needs to look pretty and navigate to other pages
          */
         public ActionResult Index() {
             return View();
+
         }
         /*
          *  Brandon
@@ -17,7 +26,7 @@ namespace ThreadedProject_Workshop5.Controllers {
          *  all the agents (preferably with a separate section for each agency)
          */
         public ActionResult Contact() {
-          
+            SQLAdapter.SQLAdapter.GetFromDB<Agents>(out agents, new TravelExpertsDB());
             return View();
         }
         /*
