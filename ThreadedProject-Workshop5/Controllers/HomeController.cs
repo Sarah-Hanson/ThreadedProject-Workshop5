@@ -43,8 +43,10 @@ namespace ThreadedProject_Workshop5.Controllers {
          */
         public ActionResult Packages() {
             ViewBag.Message = "Your package page.";
+            List<TravelPackage> packages;
+            dbo.GetConglomerate(out packages);
 
-            return View();
+            return View(packages);
         }   
         /*
          * Neel

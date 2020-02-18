@@ -10,6 +10,6 @@ namespace ThreadedProject_Workshop5.Models {
         public DateTime PkgEndDate { get; set; }
         public string PkgDesc { get; set; }
         public decimal PkgBasePrice { get; set; }
-        public decimal PkgAgencyCommission { get; set; }
+       
     }
 }

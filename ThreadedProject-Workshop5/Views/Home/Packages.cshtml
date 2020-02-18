@@ -29,9 +29,6 @@
         <th>
             @Html.DisplayNameFor(model => model.PkgBasePrice)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PkgAgencyCommission)
-        </th>
         <th></th>
     </tr>
 
@@ -54,9 +51,6 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.PkgBasePrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PkgAgencyCommission)
         </td>
         <td>
             @Html.ActionLink("Book Now", "Booking", new {  id=item.PackageID })
