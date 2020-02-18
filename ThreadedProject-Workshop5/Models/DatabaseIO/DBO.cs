@@ -21,10 +21,8 @@ namespace ThreadedProject_Workshop5.Models {
                 return instance;
             }
         }
-
         private static DBO instance = null;
         private TravelExpertsDB db;
-
         /*
          * Gets all packages/products and puts them in TravelPackage objects
          */
@@ -75,7 +73,7 @@ namespace ThreadedProject_Workshop5.Models {
          * Gets a specific customer based on username
          */
         public bool GetConglomerate(out TravelCustomer outCust, string username) {
-            string query = "select * from Customers where CustUserName = " + username;
+            string query = "select * from Customers where CustUserName = \'" + username + "\'";
             bool success = SQLAdapter.SQLAdapter.GetFromDB<Customers>(out List<Customers> customers, db, query);
 
             if (customers.Count > 0) {// If a user with that username exists

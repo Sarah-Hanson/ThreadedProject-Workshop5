@@ -292,7 +292,9 @@ namespace SQLAdapter {
      */
     public static class LogWriter {
         public static void Log(string logMessage) {
-            using (StreamWriter w = File.AppendText("log.txt")) {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            using (StreamWriter w = File.AppendText(Path.Combine(path, "log.txt"))) {
                 w.Write("\r\nLog Entry: ");
                 w.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToLongDateString()}");
                 w.WriteLine("  :");

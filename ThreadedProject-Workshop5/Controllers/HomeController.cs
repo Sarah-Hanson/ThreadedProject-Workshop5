@@ -7,6 +7,8 @@ using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
 namespace ThreadedProject_Workshop5.Controllers {
     public class HomeController : Controller {
         readonly DBO dbo = DBO.Instance;
+        const bool debug = true;
+
         /*
          *  Brandon
          *  This page just needs to look pretty and navigate to other pages
@@ -53,12 +55,15 @@ namespace ThreadedProject_Workshop5.Controllers {
         }
         public ActionResult UserProfile() {
             TravelCustomer travelCust;
+            if(debug) {
+                LogUserIn("user1");
+            }
+
             dbo.GetConglomerate(out travelCust, Session["UserLogin"].ToString());
 
-            ViewBag.User = travelCust;
             ViewBag.Message = "Your profile page.";
 
-            return View();
+            return View(travelCust);
         }
 
         /*
