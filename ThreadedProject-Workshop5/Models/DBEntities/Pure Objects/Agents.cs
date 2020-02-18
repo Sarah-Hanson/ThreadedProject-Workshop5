@@ -2,6 +2,8 @@
  * Author: Sarah
  */
 namespace ThreadedProject_Workshop5.Models.DBEntities {
+    using System;
+    using System.Collections.Generic;
     public class Agents {
         public string AgentId { get; set; }
         public string AgtFirstName { get; set; }

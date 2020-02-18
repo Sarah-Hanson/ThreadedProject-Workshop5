@@ -17,8 +17,7 @@ namespace ThreadedProject_Workshop5.Controllers {
          *  all the agents (preferably with a separate section for each agency)
          */
         public ActionResult Contact() {
-            ViewBag.Message = "Your contact page.";
-
+          
             return View();
         }
         /*

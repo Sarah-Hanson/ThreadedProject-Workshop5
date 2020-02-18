@@ -1,17 +1,38 @@
-﻿@{
+﻿@model ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects.Agents
+    <
+
+@{
     ViewBag.Title = "Contact";
 }
 <h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+
+
+<div class="card" style="width: 18rem;height:300px;">
+    <img class="card-img-top" src="~/Images/People/@Html.DisplayFor(model => model.AgentId)" + ".png" alt="@Html.DisplayFor(model => model.AgtFirstName)">
+    <div class="card-body">
+        <h4 class="card-title">@Html.DisplayFor(model => model.AgentId) @Html.DisplayFor(model => model.AgtMiddleInitial) @Html.DisplayFor(model => model.AgtLastName)  </h4>
+        <h5 class="card-text">@Html.DisplayFor(model => model.AgtPosition)</h5>
+        <hr />
+        <abbr title="Phone">P:</abbr><a href="tel:@Html.DisplayFor(model => model.AgtBusPhone)">@Html.DisplayFor(model => model.AgtBusPhone)</a>
+        <abbr title="Email">E:</abbr><a href="mailto:@Html.DisplayFor(model => model.AgtEmail)">@Html.DisplayFor(model => model.AgtEmail)</a>
+    </div>
+</div>
+@foreach (var item in Model)
+{
+    <div class="card" style="width: 18rem;height:300px;">
+        <img class="card-img-top" src="~/Images/People/@Html.DisplayFor(modelItem => item.AgentId)" + ".png" alt="@Html.DisplayFor(modelItem => item.AgtFirstName)">
+        <div class="card-body">
+            <h4 class="card-title">@Html.DisplayFor(modelItem => item.AgentId) @Html.DisplayFor(modelItem => item.AgtMiddleInitial) @Html.DisplayFor(modelItem => item.AgtLastName)  </h4>
+            <h5 class="card-text">@Html.DisplayFor(modelItem => item.AgtPosition)</h5>
+            <hr />
+            <abbr title="Phone">P:</abbr><a href="tel:@Html.DisplayFor(modelItem => item.AgtBusPhone)">@Html.DisplayFor(modelItem => item.AgtBusPhone)</a>
+            <abbr title="Email">E:</abbr><a href="mailto:@Html.DisplayFor(modelItem => item.AgtEmail)">@Html.DisplayFor(modelItem => item.AgtEmail)</a>
+        </div>
+    </div>
+
+
+
+
+}

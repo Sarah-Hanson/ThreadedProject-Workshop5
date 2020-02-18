@@ -156,6 +156,70 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\People\1.png" />
+    <Content Include="Images\People\2.png" />
+    <Content Include="Images\People\3.png" />
+    <Content Include="Images\People\4.png" />
+    <Content Include="Images\People\5.png" />
+    <Content Include="Images\People\6.png" />
+    <Content Include="Images\People\7.png" />
+    <Content Include="Images\People\8.png" />
+    <Content Include="Images\People\9.png" />
+    <Content Include="Images\pkgs\Cliffs-crop.jpg" />
+    <Content Include="Images\pkgs\Harbor-crop.jpg" />
+    <Content Include="Images\pkgs\Mountain-crop.jpg" />
+    <Content Include="Images\pkgs\Sunrise-crop.jpg" />
+    <Content Include="Images\Places\Beach1.jpg" />
+    <Content Include="Images\Places\BuckinghamPal.jpg" />
+    <Content Include="Images\Places\Castle.jpg" />
+    <Content Include="Images\Places\Cliffs-crop.jpg" />
+    <Content Include="Images\Places\Donkey_engine.jpg" />
+    <Content Include="Images\Places\fabian-mardi-kVKz9qnJC-k-unsplash.jpg" />
+    <Content Include="Images\Places\fall1.jpg" />
+    <Content Include="Images\Places\Flowers1.jpg" />
+    <Content Include="Images\Places\Fountain.jpg" />
+    <Content Include="Images\Places\GettyImages-513939550.jpg" />
+    <Content Include="Images\Places\GinzanOnsen.jpg" />
+    <Content Include="Images\Places\Guardian.jpg" />
+    <Content Include="Images\Places\Gundam.jpg" />
+    <Content Include="Images\Places\Harbor.jpg" />
+    <Content Include="Images\Places\hawaii.jpg" />
+    <Content Include="Images\Places\Kyoto %282%29.jpg" />
+    <Content Include="Images\Places\Kyoto.jpg" />
+    <Content Include="Images\Places\Kyoto2.jpg" />
+    <Content Include="Images\Places\Mountain1.jpg" />
+    <Content Include="Images\Places\mountains1.jpg" />
+    <Content Include="Images\Places\Nara.jpg" />
+    <Content Include="Images\Places\Prague.jpg" />
+    <Content Include="Images\Places\Sait_sunrise.jpg" />
+    <Content Include="Images\Places\Shirahama.jpg" />
+    <Content Include="Images\Places\Shirahama2.jpg" />
+    <Content Include="Images\Places\Shirakawago.jpg" />
+    <Content Include="Images\Places\Sunrise1.jpg" />
+    <Content Include="Images\Places\Sunrise2.jpg" />
+    <Content Include="Images\Places\sunrise3.jpg" />
+    <Content Include="Images\Places\Sunrise4.jpg" />
+    <Content Include="Images\Places\Sunrise5.jpg" />
+    <Content Include="Images\Places\Sunrise6.jpg" />
+    <Content Include="Images\Places\Sunrise7.jpg" />
+    <Content Include="Images\Places\sunrise8.jpg" />
+    <Content Include="Images\Places\Sunset.jpg" />
+    <Content Include="Images\Places\Tokyo.jpg" />
+    <Content Include="Images\Places\TrafalgarSq.jpg" />
+    <Content Include="Images\Places\TrafalgarSq2.jpg" />
+    <Content Include="Images\Places\Vienna.jpg" />
+    <Content Include="Images\Places\Vienna2.jpg" />
+    <Content Include="Images\Places\ViennaOpera.jpg" />
+    <Content Include="Images\Places\Water.jpg" />
+    <Content Include="Images\Places\WCTrail1.jpg" />
+    <Content Include="Images\Places\Wood2.jpg" />
+    <Content Include="Images\Places\Woods1.jpg" />
+    <Content Include="Images\Places\Zen.jpg" />
+    <Content Include="Images\scrollpics\BuckinghamPal.jpg" />
+    <Content Include="Images\scrollpics\mountains1.jpg" />
+    <Content Include="Images\scrollpics\Shirahama.jpg" />
+    <Content Include="Images\scrollpics\Vienna2.jpg" />
+    <Content Include="Images\scrollpics\Zen.jpg" />
     <Content Include="Media\agentt.jpg" />
     <Content Include="Media\agentt10.jpg" />
     <Content Include="Media\agentt11.jpg" />
@@ -223,6 +287,7 @@
     <Content Include="Media\Wood2.jpg" />
     <Content Include="Media\Woods1.jpg" />
     <Content Include="Media\Zen.jpg" />
+    <Content Include="ClassDiagram1.cd" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -246,7 +311,6 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -343,6 +407,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\Packages.cshtml" />
+    <Content Include="Views\Home\Booking.cshtml" />
+    <Content Include="Views\Home\UserProfile.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -353,10 +421,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Home\Register.cshtml" />
-    <Content Include="Views\Home\Packages.cshtml" />
-    <Content Include="Views\Home\Booking.cshtml" />
-    <Content Include="Views\Home\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -367,10 +431,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.d.ts" />
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
