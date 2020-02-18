@@ -31,10 +31,15 @@ namespace ThreadedProject_Workshop5.Controllers {
 
             return View();
         }
+        
+        
+        
         /*
          * Neel
          * Allows a logged in customer to book a vacation
          */
+
+
         public ActionResult Booking() {
             ViewBag.Message = "Your booking page.";
 
@@ -45,6 +50,12 @@ namespace ThreadedProject_Workshop5.Controllers {
          * Allows users to manage their info, credit cards, rewards card and see all their 
          * bookings with a total owing for all their bookings.
          */
+         public ActionResult Register()
+        {
+            ViewBag.Message = "Your Register Page";
+
+                return View();
+        }
         public ActionResult UserProfile() {
 
             ViewBag.Message = "Your profile page.";
