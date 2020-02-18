@@ -6,6 +6,8 @@ using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
  */
 namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
     public class TravelBooking {
+        private TripTypes tripType;
+
         public int BookingId { get; set; }
         public DateTime BookingDate { get; set; }
         public string BookingNo { get; set; }
@@ -14,7 +16,8 @@ namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
         public string TripTypeId { get; set; }
         public int PackageId { get; set; }
 
-        public TripTypes tripType { get; set; }
+        public TripTypes TripType { get; set; }
+        public TravelPackage BookPackage { get; set; }
 
         public TravelBooking() { }
         public TravelBooking(Bookings b) {
@@ -28,7 +31,9 @@ namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
             List<TripTypes> trip = new List<TripTypes>();
             TravelExpertsDB db = new TravelExpertsDB();
             if (SQLAdapter.SQLAdapter.GetFromDB<TripTypes>(out trip, db))
-                tripType = trip[0];
+                TripType = trip[0];
+            if (DBO.Instance.GetConglomerate(out List<TravelPackage> pack))
+                BookPackage = pack[0];
         }
     }
 }

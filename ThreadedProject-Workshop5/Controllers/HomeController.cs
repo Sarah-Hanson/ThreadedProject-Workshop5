@@ -1,6 +1,6 @@
 
-﻿using System.Collections.Generic;
-﻿using System.Web.Mvc;
+using System.Collections.Generic;
+using System.Web.Mvc;
 using ThreadedProject_Workshop5.Models;
 using ThreadedProject_Workshop5.Models.DBEntities;
 using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
@@ -9,18 +9,11 @@ using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
 * Framework:Sarah
 */
 namespace ThreadedProject_Workshop5.Controllers {
-    
+
     public class HomeController : Controller {
-
-
         List<Agents> agents;
-
-
-
         readonly DBO dbo = DBO.Instance;
         const bool debug = true;
-
-
         /*
          *  Brandon
          *  This page just needs to look pretty and navigate to other pages
@@ -50,7 +43,7 @@ namespace ThreadedProject_Workshop5.Controllers {
             dbo.GetConglomerate(out packages);
 
             return View(packages);
-        }   
+        }
         /*
          * Neel
          * Allows a logged in customer to book a vacation
@@ -60,26 +53,28 @@ namespace ThreadedProject_Workshop5.Controllers {
 
             return View();
         }
+        public ActionResult Register() {
+            ViewBag.Message = "Your Register Page";
+
+            return View();
+        }
         /*
          * Sarah
          */
-         public ActionResult Register()
-        {
-            ViewBag.Message = "Your Register Page";
-
-                return View();
-        }
         public ActionResult UserProfile() {
-            TravelCustomer travelCust;
-            if(debug) {
-                LogUserIn("user1");
-            }
+            if (debug) { LogUserIn("user1"); }
 
-            dbo.GetConglomerate(out travelCust, Session["UserLogin"].ToString());
-
-            ViewBag.Message = "Your profile page.";
-
+            dbo.GetConglomerate(out TravelCustomer travelCust, Session["UserLogin"].ToString());
+            travelCust.CustPassword = SimpleSecurity.Decrypt(travelCust.CustPassword);
             return View(travelCust);
+        }
+        [HttpPost]
+        public ActionResult UpdateUser(TravelCustomer model) {
+
+            dbo.UpdateConglomerate(model);
+            model.CustPassword = SimpleSecurity.Encrypt(model.CustPassword);
+            dbo.GetConglomerate(out TravelCustomer travelCust, Session["UserLogin"].ToString());
+            return View("UserProfile",travelCust);
         }
 
         /*

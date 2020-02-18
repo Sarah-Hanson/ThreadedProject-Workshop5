@@ -126,6 +126,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\SimpleSecurity.cs" />
     <Compile Include="Models\DatabaseIO\TravelExpertsDB.cs" />
     <Compile Include="Models\DBEntities\Conglomerates\TravelAgency.cs" />
     <Compile Include="Models\DBEntities\Conglomerates\TravelBooking.cs" />

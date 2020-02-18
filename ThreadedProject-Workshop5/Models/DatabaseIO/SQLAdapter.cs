@@ -238,7 +238,7 @@ namespace SQLAdapter {
                 int last = fields.Length - 1;
                 foreach (PropertyInfo prop in fields) {
                     if (i != 0) { //No updating the PK
-                        query += prop.Name + prop.GetValue(updatetObj);
+                        query += prop.Name + " = \'" + prop.GetValue(updatetObj)+"\'";
                         if (i < last)
                             query += ", ";//Don't put a comma on the last option
                     }

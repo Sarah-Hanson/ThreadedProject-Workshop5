@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
 /*
  * Author: Sarah
@@ -9,24 +10,56 @@ using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
 namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
     public class TravelCustomer {
         public int CustomerID { get; set; }
+
+        [DisplayName("First Name")]
         public string CustFirstName { get; set; }
+
+        [DisplayName("Last Name")]
         public string CustLastName { get; set; }
+
+        [DisplayName("Address")]
         public string CustAddress { get; set; }
+
+        [DisplayName("City")]
         public string CustCity { get; set; }
+
+        [DisplayName("Province")]
         public string CustProv { get; set; }
+
+        [DisplayName("Postal Code")]
         public string CustPostal { get; set; }
+
+        [DisplayName("Country")]
         public string CustCountry { get; set; }
+
+        [DisplayName("Home Phone")]
         public string CustHomePhone { get; set; }
+
+        [DisplayName("Business Phone")]
         public string CustBusPhone { get; set; }
+
+        [DisplayName("Email")]
+        public string Email { get; set; }
+
+        [DisplayName("Address")]
         public string CustEmail { get; set; }
+
+        [DisplayName("Agent")]
         public int AgentId { get; set; }
+
+        [DisplayName("User Name")]
+
         public string CustUserName { get; set; }
+
+        [DisplayName("Password")]
         public string CustPassword { get; set; }
 
         public List<TravelReward> CustRewards { get; set; }
         public List<CreditCards> CustCC { get; set; }
-        public List<Bookings> CustBookings { get; set; }
+        public List<TravelBooking> CustBookings { get; set; }
 
+        public TravelCustomer() {
+        }
         public TravelCustomer(Customers c) {
             CustomerID = c.CustomerID;
             CustFirstName = c.CustFirstName;
@@ -67,7 +100,11 @@ namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
                 string query = "select * from Bookings " +
                    "where CustomerID = " + this.CustomerID;
                 SQLAdapter.SQLAdapter.GetFromDB<Bookings>(out List<Bookings> o, db, query);
-                CustBookings = o;
+                CustBookings = new List<TravelBooking>();
+                foreach (Bookings book in o) {
+                    TravelBooking b = new TravelBooking(book);
+                    CustBookings.Add(b);
+                }
             }
         }
     }

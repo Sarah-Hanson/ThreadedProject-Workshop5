@@ -22,7 +22,7 @@ namespace ThreadedProject_Workshop5.Models {
             }
         }
         private static DBO instance = null;
-        private TravelExpertsDB db;
+        private readonly TravelExpertsDB db;
         /*
          * Gets all packages/products and puts them in TravelPackage objects
          */
@@ -93,6 +93,7 @@ namespace ThreadedProject_Workshop5.Models {
         public bool UpdateConglomerate(TravelCustomer c) {
             //Update Customer details
             bool success = SQLAdapter.SQLAdapter.UpdateInDB<Customers>(c, db);
+            /* Cut from demo because I can't figure it out
             //Update Credit Card Details
             foreach (CreditCards cc in c.CustCC) {
                 if (!SQLAdapter.SQLAdapter.UpdateInDB<CreditCards>(cc, db))
@@ -108,7 +109,7 @@ namespace ThreadedProject_Workshop5.Models {
                 if (!SQLAdapter.SQLAdapter.UpdateInDB<Bookings>(b, db))
                     success = false;
             }
-
+            */
             return success;
         }
         /*
