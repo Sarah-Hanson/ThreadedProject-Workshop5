@@ -72,6 +72,22 @@ namespace ThreadedProject_Workshop5.Models {
             return success;
         }
         /*
+         * Gets a specific customer based on username
+         */
+        public bool GetConglomerate(out TravelCustomer outCust, string username) {
+            string query = "select * from Customers where CustUserName = " + username;
+            bool success = SQLAdapter.SQLAdapter.GetFromDB<Customers>(out List<Customers> customers, db, query);
+
+            if (customers.Count > 0) {// If a user with that username exists
+                outCust = new TravelCustomer(customers[0]);
+                return success;
+            }
+            else {
+                outCust = new TravelCustomer(new Customers());
+                return false;
+            }
+        }
+        /*
          * Updates the given customer's details, credit cards, bookings and rewards based on the info
          * in the given object. The object should be a complete object as blank fields will be updated
          * to empty entries
