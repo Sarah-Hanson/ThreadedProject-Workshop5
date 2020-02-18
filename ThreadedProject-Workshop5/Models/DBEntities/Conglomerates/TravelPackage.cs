@@ -19,6 +19,7 @@ namespace ThreadedProject_Workshop5.Models {
         public List<Products> products { get; set; }
 
         public TravelPackage(Packages p) {
+            this.PackageID = p.PackageID;
             this.PkgName = p.PkgName;
             this.PkgStartDate = p.PkgStartDate;
             this.PkgEndDate = p.PkgEndDate;

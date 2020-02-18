@@ -4,6 +4,7 @@
  */
 namespace ThreadedProject_Workshop5.Models {
     public class Packages {
+        public int PackageID { get; set; }
         public string PkgName { get; set; }
         public DateTime PkgStartDate { get; set; }
         public DateTime PkgEndDate { get; set; }

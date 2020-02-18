@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using ThreadedProject_Workshop5.Models;
 using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
 /*
@@ -29,15 +30,20 @@ namespace ThreadedProject_Workshop5.Controllers {
          * registration if not logged in
          */
         public ActionResult Packages() {
+            List<TravelPackage> package;
+            dbo.GetConglomerate(out package);
+            ViewBag.User = package;
             ViewBag.Message = "Your package page.";
 
-            return View();
+            return View(package);
         }   
         /*
          * Neel
          * Allows a logged in customer to book a vacation
          */
         public ActionResult Booking() {
+           
+            
             ViewBag.Message = "Your booking page.";
 
             return View();
