@@ -35,8 +35,9 @@ namespace ThreadedProject_Workshop5.Controllers {
          *  all the agents (preferably with a separate section for each agency)
          */
         public ActionResult Contact() {
+            List<Agents> agents;
             SQLAdapter.SQLAdapter.GetFromDB<Agents>(out agents, new TravelExpertsDB());
-            return View();
+            return View(agents);
         }
         /*
          * Neel
