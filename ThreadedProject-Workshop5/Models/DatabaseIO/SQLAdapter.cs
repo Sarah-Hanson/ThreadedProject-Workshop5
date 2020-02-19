@@ -54,7 +54,7 @@ namespace SQLAdapter {
                     }
                 }
                 catch (Exception ex) {
-                    LogWriter.Log(ex.Message);
+                    LogWriter.Log(ex);
                     outList = new List<T>();
                     return false;
                 }
@@ -166,7 +166,7 @@ namespace SQLAdapter {
                     }
                 }
                 catch (Exception ex) {
-                    LogWriter.Log(ex.Message);
+                    LogWriter.Log(ex);
                     return false;
                 }
 
@@ -215,7 +215,7 @@ namespace SQLAdapter {
                     }
                 }
                 catch (Exception ex) {
-                    LogWriter.Log(ex.Message);
+                    LogWriter.Log(ex);
                     return false;
                 }
 
@@ -254,7 +254,7 @@ namespace SQLAdapter {
                     }
                 }
                 catch (Exception ex) {
-                    LogWriter.Log(ex.Message);
+                    LogWriter.Log(ex);
                     return false;
                 }
 
@@ -277,7 +277,7 @@ namespace SQLAdapter {
                     }
                 }
                 catch (Exception ex) {
-                    LogWriter.Log(ex.Message);
+                    LogWriter.Log(ex);
                     return false;
                 }
 
@@ -291,14 +291,15 @@ namespace SQLAdapter {
      * Shamelessly adapted from the MS docs page for appending to files.
      */
     public static class LogWriter {
-        public static void Log(string logMessage) {
+        public static void Log(Exception ex) {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             using (StreamWriter w = File.AppendText(Path.Combine(path, "log.txt"))) {
                 w.Write("\r\nLog Entry: ");
                 w.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToLongDateString()}");
                 w.WriteLine("  :");
-                w.WriteLine($"  :{logMessage}");
+                w.WriteLine($"  :{ex.GetType()}");
+                w.WriteLine($"  :{ex.Message}");
                 w.WriteLine("-------------------------------");
             }
         }
