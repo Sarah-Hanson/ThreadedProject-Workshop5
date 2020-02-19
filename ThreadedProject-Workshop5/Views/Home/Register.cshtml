@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<div class="container-fluid jumbotron pt-50 jumbo-bg fill">
 
     <div class="section jumbotron see-through col-md-6">
@@ -94,3 +95,145 @@
         </form>
     </div> <!-- Section div -->
 </div><!-- Main div-->
+=======
+﻿@model ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects.Customers
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Customers</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @*   @Html.LabelFor(model => model.CustomerID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CustomerID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })
+            </div>*@
+    </div>
+    <div class="row">
+        <div class="col-3"><!--EMPTY--></div>
+
+        <div class="col-3">
+            <div class="form-group">
+                <h6>&ensp;First Name</h6>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustFirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustFirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h6>&ensp;Last Name</h6>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustLastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustLastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h6>&ensp;Address</h6>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustAddress, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h6>&ensp;City</h6>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustCity, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustCity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h6>&ensp;Province</h6>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustProv, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustProv, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h6>&ensp;Postal Code</h6>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustPostal, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustPostal, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h6>&ensp;Country</h6>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustCountry, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustCountry, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            
+        </div><!--COL-->
+        <div class="col-3">
+            <div class="form-group">
+                <h6>&ensp;Home Phone</h6>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustHomePhone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustHomePhone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h6>&ensp;Buisness Phone</h6>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustBusPhone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustBusPhone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h6>&ensp;Email</h6>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustEmail, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustEmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <h6>&ensp;UserName</h6>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustUserName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustUserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h6>&ensp;Password</h6>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CustPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CustPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div><!--COL END-->
+    <div class="col-3"><!--EMPTY--></div>
+</div>@*ROW END*@
+    }
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+>>>>>>> parent of 20ec507... Working on registration
