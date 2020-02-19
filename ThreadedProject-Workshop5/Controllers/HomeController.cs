@@ -37,6 +37,7 @@ namespace ThreadedProject_Workshop5.Controllers {
             dbo.GetConglomerate(out List<TravelPackage> packages);
             return View(packages);
         }
+        /* Fixed Up by Sarah */
         public ActionResult Booking(int id) {
             ViewBag.Loggin = IsLoggedIn();
             TravelBooking b = new TravelBooking();
@@ -54,14 +55,13 @@ namespace ThreadedProject_Workshop5.Controllers {
             ViewBag.Loggin = IsLoggedIn();
             return View();
         }
-        public ActionResult makeRegister(TravelCustomer model)
+        public ActionResult MakeRegister(TravelCustomer model)
         {//By Brandon with significant help from Sarah
-
-            ViewBag.Loggin = IsLoggedIn();
-            SQLAdapter.SQLAdapter.InsertToDB<TravelCustomer>(model, new TravelExpertsDB());
+            SQLAdapter.SQLAdapter.InsertToDB<Customers>(model, new TravelExpertsDB());
             
             dbo.GetConglomerate(out TravelCustomer cust, model.CustUserName);
             LogUserIn(model.CustUserName, model.CustomerID);
+            ViewBag.Loggin = IsLoggedIn();
             return View("Index", null);
         }
         /*

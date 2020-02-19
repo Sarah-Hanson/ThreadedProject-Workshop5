@@ -108,6 +108,13 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <h6>&ensp;Agent ID</h6>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.AgentId, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.AgentId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
                     <h6>&ensp;UserName</h6>
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.CustUserName, new { htmlAttributes = new { @class = "form-control" } })
@@ -129,7 +136,7 @@
                         @Html.ValidationMessageFor(model => model.CustConfPassword, "", new { @class = "text-danger" })
                     </div>
                 </div>
-               
+
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Submit" class="btn btn-default" />

@@ -158,7 +158,11 @@ namespace SQLAdapter {
                 try {
                     using (SqlCommand cmd = new SqlCommand(query, dbConnect)) {
                         foreach (PropertyInfo prop in fields) {
-                            cmd.Parameters.AddWithValue("@" + prop.Name, prop.GetValue(insertObj));
+                            if (prop.GetValue(insertObj) == null)
+                                cmd.Parameters.AddWithValue("@" + prop.Name, "");
+                            else {
+                                cmd.Parameters.AddWithValue("@" + prop.Name, prop.GetValue(insertObj));
+                            }
                         }
                         cmd.ExecuteScalar();
                         dbConnect.Close();
