@@ -12,37 +12,39 @@
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark navbar-expand-xl">
         @*Fixed the Toolbar~Brandon Cuthbertson*@
-        @Html.ActionLink("Travel Experts", "Index", "Home", new { @class = "navbar-brand" })
-        <button class="navbar-toggler"
-                type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item ">@Html.ActionLink("Home", "Index", "Home", new { @style = "color:#FFFFFF;" })</li>
-                <li class="nav-item ">@Html.ActionLink("Contact Us", "Contact", "Home", new { @style = "color:#FFFFFF;" })</li>
-                <li class="nav-item ">@Html.ActionLink("Vacation Packages", "Packages", "Home", new { @style = "color:#FFFFFF;" })</li>
-                <li class="nav-item ">@Html.ActionLink("Register Now", "Register", "Home", new { @style = "color:#FFFFFF;" })</li>
-                <li class="nav-item active">
-                    @if (ViewBag.Loggin) {
-                        @Html.ActionLink("Logout", "Logout", "Home", new { @class = "btn btn-outline-success my-2 my-sm-0" })
-                    }
-                    else {
-                        using (Html.BeginForm("Login", "Home", new { @class = "form-inline" })) {
-
-                            <input class="form-control" type="text" placeholder="Username" aria-label="Name"
-                                   name="Username" id="UserName">
-                            <input class="form-control" type="password" placeholder="Password"
-                                   aria-label="Password" name="Password" id="Password">
-                            <button class="btn btn-outline-success" type="submit" id="show">
-                                Login
-                            </button>
+        <div class="container-fluid">
+            @Html.ActionLink("Travel Experts", "Index", "Home", new { @class = "navbar-brand" })
+            <button class="navbar-toggler"
+                    type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">@Html.ActionLink("Home", "Index", "Home", new { @style = "color:#FFFFFF;" })</li>
+                    <li class="nav-item ">@Html.ActionLink("Contact Us", "Contact", "Home", new { @style = "color:#FFFFFF;" })</li>
+                    <li class="nav-item ">@Html.ActionLink("Vacation Packages", "Packages", "Home", new { @style = "color:#FFFFFF;" })</li>
+                    <li class="nav-item ">@Html.ActionLink("Register Now", "Register", "Home", new { @style = "color:#FFFFFF;" })</li>
+                    <li class="nav-item active">
+                        @if (ViewBag.Loggin) {
+                            @Html.ActionLink("Logout", "Logout", "Home", new { @class = "btn btn-outline-success my-2 my-sm-0" })
                         }
-                    }
-                </li>
-            </ul>
-        </div>
+                        else {
+                            using (Html.BeginForm("Login", "Home", new { @class = "form-inline" })) {
+
+                                <input class="form-control" type="text" placeholder="Username" aria-label="Name"
+                                       name="Username" id="UserName">
+                                <input class="form-control" type="password" placeholder="Password"
+                                       aria-label="Password" name="Password" id="Password">
+                                <button class="btn btn-outline-success" type="submit" id="show">
+                                    Login
+                                </button>
+                            }
+                        }
+                    </li>
+                </ul>
+            </div>
+            </div>
     </nav>
     <div class="container body-content">
         @RenderBody()
