@@ -6,8 +6,6 @@ using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
  */
 namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
     public class TravelBooking {
-        private TripTypes tripType;
-
         public int BookingId { get; set; }
         public DateTime BookingDate { get; set; }
         public string BookingNo { get; set; }

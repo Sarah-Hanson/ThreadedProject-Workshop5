@@ -13,7 +13,6 @@ using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
 namespace ThreadedProject_Workshop5.Controllers {
 
     public class HomeController : Controller {
-        List<Agents> agents;
         readonly DBO dbo = DBO.Instance;
         const bool debug = true;
         /*
@@ -37,14 +36,17 @@ namespace ThreadedProject_Workshop5.Controllers {
             dbo.GetConglomerate(out List<TravelPackage> packages);
             return View(packages);
         }
-        public ActionResult Booking(TravelBooking book) {
+        public ActionResult Booking(int id) {
             ViewBag.Loggin = IsLoggedIn();
-            dbo.AddtoDB(book);
-            return View(book);
+            TravelBooking b = new TravelBooking();
+            b.PackageId = id;
+            b.CustomerId = (int)Session["UserID"];
+            return View(b);
         }
-        public ActionResult book(TravelBooking model) {
+        public ActionResult Book(TravelBooking model) {
             ViewBag.Loggin = IsLoggedIn();
-            return View(model);
+            dbo.AddtoDB(model);
+            return View("index",null);
         }
         public ActionResult Register() {
             ViewBag.Loggin = IsLoggedIn();
