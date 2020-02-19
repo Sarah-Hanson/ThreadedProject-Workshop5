@@ -23,7 +23,8 @@ namespace ThreadedProject_Workshop5.Controllers {
             return View();
 
         }
-        public ActionResult Contact() {
+        
+        public ActionResult Contact() { //by Brando, additions by Sarah
             ViewBag.Loggin = IsLoggedIn();
             SQLAdapter.SQLAdapter.GetFromDB<Agents>(out List<Agents> agents, new TravelExpertsDB());
             return View(agents);
@@ -48,9 +49,20 @@ namespace ThreadedProject_Workshop5.Controllers {
             dbo.AddtoDB(model);
             return View("index",null);
         }
-        public ActionResult Register() {
+        public ActionResult Register() { 
+            //By Brandon 
             ViewBag.Loggin = IsLoggedIn();
             return View();
+        }
+        public ActionResult makeRegister(TravelCustomer model)
+        {//By Brandon with significant help from Sarah
+
+            ViewBag.Loggin = IsLoggedIn();
+            SQLAdapter.SQLAdapter.InsertToDB<Customers>(model, new TravelExpertsDB());
+            
+            dbo.GetConglomerate(out TravelCustomer cust, model.CustUserName);
+            LogUserIn(model.CustUserName, model.CustomerID);
+            return View("Index", null);
         }
         /*
          * Sarah
