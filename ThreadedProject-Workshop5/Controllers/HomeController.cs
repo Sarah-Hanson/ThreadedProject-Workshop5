@@ -14,7 +14,7 @@ namespace ThreadedProject_Workshop5.Controllers {
 
     public class HomeController : Controller {
         readonly DBO dbo = DBO.Instance;
-        const bool debug = true;
+        const bool debug = false;
         /*
          *  Brandon
          */
@@ -78,10 +78,9 @@ namespace ThreadedProject_Workshop5.Controllers {
         [HttpPost]
         public ActionResult UpdateUser(TravelCustomer model) {
             ViewBag.Loggin = IsLoggedIn();
-
-            dbo.UpdateConglomerate(model);
-            model.CustPassword = SimpleSecurity.Encrypt(model.CustPassword);
             model.CustomerID = (int)Session["UserID"];
+            model.CustPassword = SimpleSecurity.Encrypt(model.CustPassword);
+            dbo.UpdateConglomerate(model);
             dbo.GetConglomerate(out TravelCustomer travelCust, Session["UserLogin"].ToString()); //get it again since the model passback is borken for the non-pure object bits
             return View("UserProfile", travelCust);
         }
