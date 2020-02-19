@@ -237,18 +237,21 @@ namespace SQLAdapter {
             using (SqlConnection dbConnect = dbCon.GetConnection()) {
                 dbConnect.Open();
                 // Crafting the SQL Query
-                string query = "Update " + tableType.GetType().Name + "Set(";
+                string query = "Update " + tableType.GetType().Name + " Set ";
                 int i = 0;
                 int last = fields.Length - 1;
                 foreach (PropertyInfo prop in fields) {
                     if (i != 0) { //No updating the PK
-                        query += prop.Name + " = \'" + prop.GetValue(updatetObj)+"\'";
+                        if (!prop.PropertyType.Equals(typeof(int)))
+                            query += prop.Name + " = \'" + prop.GetValue(updatetObj) + "\'";
+                        else
+                            query += prop.Name + " = " + prop.GetValue(updatetObj);
                         if (i < last)
                             query += ", ";//Don't put a comma on the last option
                     }
                     i++;
                 }
-                query += ") where " + fields[0].Name + " = " + fields[0].GetValue(updatetObj); //Use Primary key to define which object to update
+                query += " where " + fields[0].Name + " = " + fields[0].GetValue(updatetObj); //Use Primary key to define which object to update
                 // Running the Query
                 try {
                     using (SqlCommand cmd = new SqlCommand(query, dbConnect)) {

@@ -24,7 +24,8 @@
                     <li class="nav-item ">@Html.ActionLink("Home", "Index", "Home", new { @style = "color:#FFFFFF;" })</li>
                     <li class="nav-item ">@Html.ActionLink("Contact Us", "Contact", "Home", new { @style = "color:#FFFFFF;" })</li>
                     <li class="nav-item ">@Html.ActionLink("Vacation Packages", "Packages", "Home", new { @style = "color:#FFFFFF;" })</li>
-                    <li class="nav-item ">@Html.ActionLink("Register Now", "Register", "Home", new { @style = "color:#FFFFFF;" })</li>
+                    @if (!ViewBag.Loggin) {<li class="nav-item ">@Html.ActionLink("Register Now", "Register", "Home", new { @style = "color:#FFFFFF;" })</li> }
+                    else {<li class="nav-item ">@Html.ActionLink("User Profile", "UserProfile", "Home", new { @style = "color:#FFFFFF;" })</li> }
                 </ul>
                 <ul class="navbar-nav ml-auto">
 
