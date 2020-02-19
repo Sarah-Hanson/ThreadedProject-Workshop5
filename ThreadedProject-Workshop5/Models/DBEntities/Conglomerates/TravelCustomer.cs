@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
 /*
  * Author: Sarah
@@ -10,49 +12,45 @@ using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
 namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
     public class TravelCustomer {
         public int CustomerID { get; set; }
-
-        [DisplayName("First Name")]
+        [Required(ErrorMessage = "Please Insert Your First Name")]
         public string CustFirstName { get; set; }
-
-        [DisplayName("Last Name")]
+        [Required(ErrorMessage = "Please Insert Your Last Name")]
         public string CustLastName { get; set; }
-
-        [DisplayName("Address")]
+        [Required(ErrorMessage = "Please Insert Your Address")]
         public string CustAddress { get; set; }
-
-        [DisplayName("City")]
+        [Required(ErrorMessage = "Please Insert Your City")]
         public string CustCity { get; set; }
-
-        [DisplayName("Province")]
+        [Required(ErrorMessage = "Please Insert Your Two Letter Province/State")]
+        [MaxLength(2)]
         public string CustProv { get; set; }
+        [Required(ErrorMessage = "Please Insert Your Postal Code")]
+        
+        [RegularExpression(@"(^\d{5}(-\d{4})?$)|(^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[ABCEGHJKLMNPRSTVWXYZabceghjklmnprstv‌​xy]{1} *\d{1}[ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvxy]{1}\d{1}$)", ErrorMessage = "That postal code is not a valid US or Canadian postal code.")]
 
-        [DisplayName("Postal Code")]
         public string CustPostal { get; set; }
-
-        [DisplayName("Country")]
+        [Required(ErrorMessage = "Please Insert Your Country")]
         public string CustCountry { get; set; }
-
-        [DisplayName("Home Phone")]
+        [Required(ErrorMessage = "Please Insert Your Home Phone")]
+        [Phone]
         public string CustHomePhone { get; set; }
-
-        [DisplayName("Business Phone")]
+        [Phone]
         public string CustBusPhone { get; set; }
-
-        [DisplayName("Email")]
-        public string Email { get; set; }
-
-        [DisplayName("Address")]
+        [EmailAddress]
         public string CustEmail { get; set; }
-
-        [DisplayName("Agent")]
         public int AgentId { get; set; }
-
-        [DisplayName("User Name")]
-
+        [Required(ErrorMessage = "Please Insert Your UserName")]
         public string CustUserName { get; set; }
 
-        [DisplayName("Password")]
+        [Required(ErrorMessage = "Please Insert Your Password")]
+        [DataType(DataType.Password)]
         public string CustPassword { get; set; }
+
+        [NotMapped]
+        [Required(ErrorMessage = "Please Confirm Your Password")]
+        [Compare("CustPassword")]
+        [DisplayName("Confirm Password")]
+        [DataType(DataType.Password)]
+        public string CustConfPassword { get; set; }
 
         public List<TravelReward> CustRewards { get; set; }
         public List<CreditCards> CustCC { get; set; }

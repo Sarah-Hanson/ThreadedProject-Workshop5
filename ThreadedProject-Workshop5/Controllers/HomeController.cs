@@ -58,7 +58,7 @@ namespace ThreadedProject_Workshop5.Controllers {
         {//By Brandon with significant help from Sarah
 
             ViewBag.Loggin = IsLoggedIn();
-            SQLAdapter.SQLAdapter.InsertToDB<Customers>(model, new TravelExpertsDB());
+            SQLAdapter.SQLAdapter.InsertToDB<TravelCustomer>(model, new TravelExpertsDB());
             
             dbo.GetConglomerate(out TravelCustomer cust, model.CustUserName);
             LogUserIn(model.CustUserName, model.CustomerID);

@@ -64,12 +64,7 @@ namespace ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects {
         [DataType(DataType.Password)]
         public string CustPassword { get; set; }
 
-        [NotMapped]
-        [Required(ErrorMessage = "Please Confirm Your Password")]
-        [Compare("CustPassword")]
-        [DisplayName ("Confirm Password")]
-        [DataType(DataType.Password)]
-        public string CustConfPassword { get; set; }
+        
 
 
     }
