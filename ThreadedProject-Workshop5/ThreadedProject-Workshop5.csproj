@@ -222,6 +222,7 @@
     <Content Include="Images\scrollpics\mountains.jpg" />
     <Content Include="Images\scrollpics\Palace.jpg" />
     <Content Include="Images\scrollpics\Vienna.jpg" />
+    <Content Include="Images\User.png" />
     <Content Include="Scripts\B-script\JavaScript.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -342,7 +343,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\Register2.cshtml" />
     <Content Include="Views\Home\UserProfile.cshtml" />
     <Content Include="Views\Home\Packages.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -356,6 +357,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Home\Booking.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
