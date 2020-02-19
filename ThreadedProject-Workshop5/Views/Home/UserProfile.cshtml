@@ -115,14 +115,12 @@
             </div>
             <div class="col">
                 <H2>Card Details</H2>
-                @{int i = 0;
-                }
                 @foreach (var cc in Model.CustCC) {
 
                     <div class="col-md-10">
-                        <input class="form-control" type="text" id="CCName@i" placeholder="Name" value="@cc.CCName" />
-                        <input class="form-control" type="text" id="CCNum@i" placeholder="Number" value="@cc.CCNumber" />
-                        <input class="form-control" type="date" id="CCExpiry@i" value="@cc.CCExpiry.Date.ToString("yyyy-MM-dd")">
+                        <input class="form-control" type="text" id="CCName" placeholder="Name" value="@cc.CCName" />
+                        <input class="form-control" type="text" id="CCNum" placeholder="Number" value="@cc.CCNumber" />
+                        <input class="form-control" type="date" id="CCExpiry" value="@cc.CCExpiry.Date.ToString("yyyy-MM-dd")">
                         <hr />
                     </div>
                 }

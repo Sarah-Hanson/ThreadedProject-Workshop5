@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using ThreadedProject_Workshop5.Models;
@@ -16,54 +17,44 @@ namespace ThreadedProject_Workshop5.Controllers {
         const bool debug = true;
         /*
          *  Brandon
-         *  This page just needs to look pretty and navigate to other pages
          */
         public ActionResult Index() {
+            ViewBag.Loggin = IsLoggedIn();
             return View();
 
         }
-        /*
-         *  Brandon
-         *  Functionality, Use list of agencie with agents to show the contact info for 
-         *  all the agents (preferably with a separate section for each agency)
-         */
         public ActionResult Contact() {
-            List<Agents> agents;
-            SQLAdapter.SQLAdapter.GetFromDB<Agents>(out agents, new TravelExpertsDB());
+            ViewBag.Loggin = IsLoggedIn();
+            SQLAdapter.SQLAdapter.GetFromDB<Agents>(out List<Agents> agents, new TravelExpertsDB());
             return View(agents);
         }
         /*
          * Neel
-         * Display all packages, allow selecting a package to book, or redirecting to 
-         * registration if not logged in
          */
         public ActionResult Packages() {
-            ViewBag.Message = "Your package page.";
-            List<TravelPackage> packages;
-            dbo.GetConglomerate(out packages);
-
+            ViewBag.Loggin = IsLoggedIn();
+            dbo.GetConglomerate(out List<TravelPackage> packages);
             return View(packages);
         }
-        /*
-         * Neel
-         * Allows a logged in customer to book a vacation
-         */
-        public ActionResult Booking(TravelBooking book)
-        {
+        public ActionResult Booking(TravelBooking book) {
+            ViewBag.Loggin = IsLoggedIn();
             dbo.AddtoDB(book);
             return View(book);
         }
-        public ActionResult book(TravelBooking model)
-        {
+        public ActionResult book(TravelBooking model) {
+            ViewBag.Loggin = IsLoggedIn();
             return View(model);
         }
         public ActionResult Register() {
-            ViewBag.Message = "Your Register Page";
-
-                return View();
+            ViewBag.Loggin = IsLoggedIn();
+            return View();
         }
+        /*
+         * Sarah
+         */
         public ActionResult UserProfile() {
-            if (debug) { LogUserIn("user1"); }
+            ViewBag.Loggin = IsLoggedIn();
+            if (debug) { LogUserIn("user1",104); }
 
             dbo.GetConglomerate(out TravelCustomer travelCust, Session["UserLogin"].ToString());
             travelCust.CustPassword = SimpleSecurity.Decrypt(travelCust.CustPassword);
@@ -71,13 +62,33 @@ namespace ThreadedProject_Workshop5.Controllers {
         }
         [HttpPost]
         public ActionResult UpdateUser(TravelCustomer model) {
+            ViewBag.Loggin = IsLoggedIn();
 
             dbo.UpdateConglomerate(model);
             model.CustPassword = SimpleSecurity.Encrypt(model.CustPassword);
-            dbo.GetConglomerate(out TravelCustomer travelCust, Session["UserLogin"].ToString());
-            return View("UserProfile",travelCust);
+            model.CustomerID = (int)Session["UserID"];
+            dbo.GetConglomerate(out TravelCustomer travelCust, Session["UserLogin"].ToString()); //get it again since the model passback is borken for the non-pure object bits
+            return View("UserProfile", travelCust);
         }
-
+        [HttpPost]
+        public ActionResult Login(string UserName, string Password) {
+            Password = SimpleSecurity.Encrypt(Password);
+            dbo.GetConglomerate(out List<TravelCustomer> custs);
+            foreach(TravelCustomer tc in custs) {
+                if((tc.CustUserName.Equals(UserName)) &&
+                    tc.CustPassword.Equals(Password)) {
+                    LogUserIn(UserName, tc.CustomerID); // Its a match!
+                    break;
+                }
+            }
+            ViewBag.Loggin = IsLoggedIn();
+            return View("index",null);
+        }
+        public ActionResult Logout(string UserName, string Password) {
+            LogUserOut();
+            ViewBag.Loggin = IsLoggedIn();
+            return View("index", null);
+        }
         /*
          * Author: Sarah
          * These guys are pretty self-documenting
@@ -85,11 +96,12 @@ namespace ThreadedProject_Workshop5.Controllers {
         public bool IsLoggedIn() {
             return (Session["UserLogin"] != null);
         }
-        public void LogUserIn(string userName) {
+        public void LogUserIn(string userName, int userID) {
             Session.Add("UserLogin", userName);
+            Session.Add("UserID", userID);
         }
         public void LogUserOut() {
-            if (!IsLoggedIn()) {
+            if (IsLoggedIn()) {
                 Session.Clear();
             }
         }
