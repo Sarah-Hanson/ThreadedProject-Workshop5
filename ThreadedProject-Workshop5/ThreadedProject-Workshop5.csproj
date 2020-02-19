@@ -222,6 +222,7 @@
     <Content Include="Images\scrollpics\mountains.jpg" />
     <Content Include="Images\scrollpics\Palace.jpg" />
     <Content Include="Images\scrollpics\Vienna.jpg" />
+    <Content Include="Images\User.png" />
     <Content Include="Scripts\B-script\JavaScript.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

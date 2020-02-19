@@ -25,11 +25,14 @@
                     <li class="nav-item ">@Html.ActionLink("Contact Us", "Contact", "Home", new { @style = "color:#FFFFFF;" })</li>
                     <li class="nav-item ">@Html.ActionLink("Vacation Packages", "Packages", "Home", new { @style = "color:#FFFFFF;" })</li>
                     <li class="nav-item ">@Html.ActionLink("Register Now", "Register", "Home", new { @style = "color:#FFFFFF;" })</li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+
                     <li class="nav-item active">
-                        @if (ViewBag.Loggin) {
+                        @if (ViewBag.Loggin)
+                        {
                             @Html.ActionLink("Logout", "Logout", "Home", new { @class = "btn btn-outline-success my-2 my-sm-0" })
                         }
-<<<<<<< HEAD
                         else
                         {
                             using (Html.BeginForm("Login", "Home", new { @class = "form-inline" }))
@@ -37,10 +40,10 @@
                                 {
                                     <div class="dropdown">
                                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                            
+
                                             <img src="~/Images/User.png" class="userimage" />
                                         </button>
-                                        <div class="dropdown-menu">
+                                        <div class="dropdown-menu dropdown-menu-right">
                                             <input class="form-control" type="text" placeholder="Username" aria-label="Name"
                                                    name="Username" id="UserName">
                                             <br />
@@ -52,23 +55,14 @@
                                             </button>
                                         </div>
                                     </div>
-=======
-                        else {
-                            using (Html.BeginForm("Login", "Home", new { @class = "form-inline" })) {
->>>>>>> parent of a08a080... Sorta Fixed the navBar
 
-                                <input class="form-control" type="text" placeholder="Username" aria-label="Name"
-                                       name="Username" id="UserName">
-                                <input class="form-control" type="password" placeholder="Password"
-                                       aria-label="Password" name="Password" id="Password">
-                                <button class="btn btn-outline-success" type="submit" id="show">
-                                    Login
-                                </button>
+
+                                }
                             }
                         }
-                        </li>
-                    </ul>
-                </div>
+                    </li>
+                </ul>
+            </div>
             </div>
     </nav>
     <div class="container body-content">

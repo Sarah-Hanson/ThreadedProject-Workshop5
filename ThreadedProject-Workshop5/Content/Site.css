@@ -73,3 +73,7 @@ textarea {
     transform: translate(-50%, -50%);
     text-align: center;
 }
+.userimage {
+    height: 20px;
+    width: auto;
+}
