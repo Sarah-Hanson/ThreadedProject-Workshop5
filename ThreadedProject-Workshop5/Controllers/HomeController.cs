@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using ThreadedProject_Workshop5.Models;
 using ThreadedProject_Workshop5.Models.DBEntities;
 using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
+using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
 
 /*
 * Framework:Sarah
@@ -73,8 +74,8 @@ namespace ThreadedProject_Workshop5.Controllers {
         [HttpPost]
         public ActionResult Login(string UserName, string Password) {
             Password = SimpleSecurity.Encrypt(Password);
-            dbo.GetConglomerate(out List<TravelCustomer> custs);
-            foreach(TravelCustomer tc in custs) {
+            SQLAdapter.SQLAdapter.GetFromDB<Customers>(out List<Customers> custs,new TravelExpertsDB());
+            foreach(Customers tc in custs) {
                 if((tc.CustUserName.Equals(UserName)) &&
                     tc.CustPassword.Equals(Password)) {
                     LogUserIn(UserName, tc.CustomerID); // Its a match!
