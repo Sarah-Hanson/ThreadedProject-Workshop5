@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ThreadedProject_Workshop5.Models.DBEntities;
 using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
 using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
@@ -53,10 +54,16 @@ namespace ThreadedProject_Workshop5.Models {
             }
             return success;
         }
+
+        internal void GetConglomerate()
+        {
+            throw new NotImplementedException();
+        }
+
         /*
-         * Gets all customers/bookings/creditcards/rewardsPrograms and puts them in 
-         * TravelPackage objects
-         */
+* Gets all customers/bookings/creditcards/rewardsPrograms and puts them in 
+* TravelPackage objects
+*/
         public bool GetConglomerate(out List<TravelCustomer> outlist) {
             List<Customers> customers;
             outlist = new List<TravelCustomer>();

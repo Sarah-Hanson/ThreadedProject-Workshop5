@@ -24,6 +24,7 @@ namespace ThreadedProject_Workshop5.Controllers {
             return View();
 
         }
+        
         public ActionResult Contact() {
             ViewBag.Loggin = IsLoggedIn();
             SQLAdapter.SQLAdapter.GetFromDB<Agents>(out List<Agents> agents, new TravelExpertsDB());
@@ -49,6 +50,16 @@ namespace ThreadedProject_Workshop5.Controllers {
         public ActionResult Register() {
             ViewBag.Loggin = IsLoggedIn();
             return View();
+        }
+        public ActionResult makeRegister(TravelCustomer model)
+        {
+
+            ViewBag.Loggin = IsLoggedIn();
+            SQLAdapter.SQLAdapter.InsertToDB<Customers>(model, new TravelExpertsDB());
+            
+            dbo.GetConglomerate(out TravelCustomer cust, model.CustUserName);
+            LogUserIn(model.CustUserName, model.CustomerID);
+            return View("Index", null);
         }
         /*
          * Sarah
