@@ -29,10 +29,10 @@
                 <ul class="navbar-nav ml-auto">
 
                     <li class="nav-item active">
-                        @if (ViewBag.Loggin)
-                        {
+                        @if (ViewBag.Loggin) {
                             @Html.ActionLink("Logout", "Logout", "Home", new { @class = "btn btn-outline-success my-2 my-sm-0" })
                         }
+<<<<<<< HEAD
                         else
                         {
                             using (Html.BeginForm("Login", "Home", new { @class = "form-inline" }))
@@ -55,26 +55,35 @@
                                             </button>
                                         </div>
                                     </div>
+=======
+                        else {
+                            using (Html.BeginForm("Login", "Home", new { @class = "form-inline" })) {
+>>>>>>> parent of a08a080... Sorta Fixed the navBar
 
-
-                                }
+                                <input class="form-control" type="text" placeholder="Username" aria-label="Name"
+                                       name="Username" id="UserName">
+                                <input class="form-control" type="password" placeholder="Password"
+                                       aria-label="Password" name="Password" id="Password">
+                                <button class="btn btn-outline-success" type="submit" id="show">
+                                    Login
+                                </button>
                             }
                         }
                     </li>
                 </ul>
             </div>
             </div>
-        </nav>
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - TravelExperts | "Witty Bottom Text"</p>
-            </footer>
-        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - TravelExperts | "Witty Bottom Text"</p>
+        </footer>
+    </div>
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
-    </body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
 </html>
