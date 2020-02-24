@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Web.UI;
 using ThreadedProject_Workshop5.Models;
 using ThreadedProject_Workshop5.Models.DBEntities;
 using ThreadedProject_Workshop5.Models.DBEntities.Conglomerates;
@@ -11,6 +12,15 @@ using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
 * Framework:Sarah
 */
 namespace ThreadedProject_Workshop5.Controllers {
+    public static class MessageBox {
+        public static void Show(this Page Page, String Message) {
+            Page.ClientScript.RegisterStartupScript(
+               Page.GetType(),
+               "MessageBox",
+               "<script language='javascript'>alert('" + Message + "');</script>"
+            );
+        }
+    }
 
     public class HomeController : Controller {
         readonly DBO dbo = DBO.Instance;
@@ -56,23 +66,30 @@ namespace ThreadedProject_Workshop5.Controllers {
         }
         public ActionResult Register() {
             //By Brandon 
+            ViewBag.Passed = "Ya";
             ViewBag.Loggin = IsLoggedIn();
             return View();
         }
         public ActionResult MakeRegister(TravelCustomer model) {//By Brandon with significant help from Sarah
-            SQLAdapter.SQLAdapter.InsertToDB<Customers>(model, new TravelExpertsDB());
+            if (!dbo.GetConglomerate(out TravelCustomer check, model.CustUserName)) {
+                SQLAdapter.SQLAdapter.InsertToDB<Customers>(model, new TravelExpertsDB());
+                dbo.GetConglomerate(out TravelCustomer cust, model.CustUserName);
+                LogUserIn(cust.CustUserName, cust.CustomerID);
+                ViewBag.Loggin = IsLoggedIn();
+                return View("Index", null);
+            }
+            else {
+                ViewBag.Passed = "No";
+                ViewBag.Loggin = IsLoggedIn();
+                return View("Register", null);
+            }
 
-            dbo.GetConglomerate(out TravelCustomer cust, model.CustUserName);
-            LogUserIn(model.CustUserName, model.CustomerID);
-            ViewBag.Loggin = IsLoggedIn();
-            return View("Index", null);
         }
         /*
          * Sarah
          */
         public ActionResult UserProfile() {
             ViewBag.Loggin = IsLoggedIn();
-            if (debug) { LogUserIn("user1", 104); }
 
             dbo.GetConglomerate(out TravelCustomer travelCust, Session["UserLogin"].ToString());
             travelCust.CustPassword = SimpleSecurity.Decrypt(travelCust.CustPassword);

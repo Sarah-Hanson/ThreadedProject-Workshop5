@@ -3,12 +3,10 @@
 @{
     ViewBag.Title = "Register";
 }
-
 <h2>Register</h2>
 @*Register Form By Brandon*@
-@using (Html.BeginForm("makeRegister", "Home", null))
-{
-    @Html.AntiForgeryToken()
+@using (Html.BeginForm("makeRegister", "Home", null)) {
+    @Html.AntiForgeryToken()    
 
     <div class="form-horizontal">
         @*<h4>Customers</h4>*@
@@ -107,7 +105,7 @@
                         @Html.ValidationMessageFor(model => model.CustEmail, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="form-group" >
+                <div class="form-group">
                     <h6>&ensp;Agent ID</h6>
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.AgentId, new { htmlAttributes = new { @class = "form-control" } })
@@ -116,6 +114,9 @@
                 </div>
                 <div class="form-group">
                     <h6>&ensp;UserName</h6>
+                    @if(ViewBag.Passed == "No") {
+                        <h6 class="warning">Username Taken</h6>
+                    }
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.CustUserName, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.CustUserName, "", new { @class = "text-danger" })

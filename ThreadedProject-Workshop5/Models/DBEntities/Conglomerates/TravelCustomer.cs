@@ -26,7 +26,6 @@ namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
         [Required(ErrorMessage = "Please Insert Your Postal Code")]
         
         [RegularExpression(@"(^\d{5}(-\d{4})?$)|(^[ABCEGHJKLMNPRSTVXYabceghjklmnprstvxy]{1}\d{1}[ABCEGHJKLMNPRSTVWXYZabceghjklmnprstv‌​xy]{1} *\d{1}[ABCEGHJKLMNPRSTVWXYZabceghjklmnprstvxy]{1}\d{1}$)", ErrorMessage = "That postal code is not a valid US or Canadian postal code.")]
-
         public string CustPostal { get; set; }
         [Required(ErrorMessage = "Please Insert Your Country")]
         public string CustCountry { get; set; }
