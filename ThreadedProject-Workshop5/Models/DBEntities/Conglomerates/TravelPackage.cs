@@ -17,6 +17,7 @@ namespace ThreadedProject_Workshop5.Models {
         [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
         public DateTime PkgEndDate { get; set; }
         public string PkgDesc { get; set; }
+        [DataType(DataType.Currency)]
         public decimal PkgBasePrice { get; set; }
         public List<Products> products { get; set; }
 
