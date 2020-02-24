@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
 /*
  * Author: Sarah
@@ -7,6 +8,8 @@ using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
 namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
     public class TravelBooking {
         public int BookingId { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [DataType(DataType.Date)]
         public DateTime BookingDate { get; set; }
         public string BookingNo { get; set; }
         public int TravelerCount { get; set; }
