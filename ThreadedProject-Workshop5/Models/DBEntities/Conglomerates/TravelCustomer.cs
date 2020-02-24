@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
 /*
  * Author: Sarah
@@ -42,6 +43,8 @@ namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
         public string CustEmail { get; set; }
         public int AgentId { get; set; }
         [Required(ErrorMessage = "Please Insert Your UserName")]
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "user name must be combination of letters and numbers only.")]
+        [Remote("UsernameExists", "Account", HttpMethod = "POST", ErrorMessage = "User name already registered.")]
         public string CustUserName { get; set; }
 
         [Required(ErrorMessage = "Please Insert Your Password")]
@@ -50,12 +53,14 @@ namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
 
         [NotMapped]
         [Required(ErrorMessage = "Please Confirm Your Password")]
-        [Compare("CustPassword")]
+        [System.ComponentModel.DataAnnotations.Compare("CustPassword")]
         [DisplayName("Confirm Password")]
         [DataType(DataType.Password)]
         public string CustConfPassword { get; set; }
 
         public List<TravelReward> CustRewards { get; set; }
+        [DataType(DataType.CreditCard)]
+        [RegularExpression(@"^\d{16}$", ErrorMessage = "Card Number has 16 digits")]
         public List<CreditCards> CustCC { get; set; }
         public List<TravelBooking> CustBookings { get; set; }
 
