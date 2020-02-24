@@ -1,0 +1,39 @@
+NOTE: PLEASE USE THE TRAVEL EXPERTS SQL LOCATED IN THIS FILE
+//JOB BREAK DOWN
+=++++++++=
+|BRANDON |
+=++++++++=
+PAGES/Coding   
+	- Template
+	- Index
+	- Contacts
+	- Registration
+	- Website Design
+Coding
+	- Validations
+	- Formating (Currency/Passwords)
+	
+
+=++++++++=
+|  NEEL  |
+=++++++++=
+Pages/Coding
+	-Booking Page
+	-Packages
+	-Registration
+Coding 
+	- Booking Page
+	- Packages
+	
+
+=++++++++=
+| SARAH  |
+=++++++++=
+Pages/Coding
+	-Login
+	-User Page
+	- Registration
+Coding
+	- DatabasIO's
+	- DBEntities
+	- SimpleSecurity
