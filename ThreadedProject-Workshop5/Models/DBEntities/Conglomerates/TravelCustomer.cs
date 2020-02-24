@@ -31,11 +31,14 @@ namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
         [Required(ErrorMessage = "Please Insert Your Country")]
         public string CustCountry { get; set; }
         [Required(ErrorMessage = "Please Insert Your Home Phone")]
-        [Phone]
+        [RegularExpression(@"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$", ErrorMessage = "This Phone Number is Invalid.")]
+        [DataType(DataType.PhoneNumber)]
+        
         public string CustHomePhone { get; set; }
-        [Phone]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$", ErrorMessage = "This Phone Number is Invalid.")]
         public string CustBusPhone { get; set; }
-        [EmailAddress]
+        [DataType(DataType.EmailAddress)]
         public string CustEmail { get; set; }
         public int AgentId { get; set; }
         [Required(ErrorMessage = "Please Insert Your UserName")]
