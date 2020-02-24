@@ -1,17 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using ThreadedProject_Workshop5.Models.DBEntities.Pure_Objects;
 /*
  * Author: Sarah
  */
 namespace ThreadedProject_Workshop5.Models.DBEntities.Conglomerates {
     public class TravelBooking {
+        [Required(ErrorMessage = "Required")]
         public int BookingId { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd MMM yyyy}")]
+        [DataType(DataType.Date)]
         public DateTime BookingDate { get; set; }
+        [Required(ErrorMessage = "Required")]
+        [Range(1, 100)]
         public string BookingNo { get; set; }
+        [Required(ErrorMessage = "Required")]
         public int TravelerCount { get; set; }
+        [Required(ErrorMessage = "Required")]
         public int CustomerId { get; set; }
+        [Required(ErrorMessage = "Required")]
         public string TripTypeId { get; set; }
+        [Required(ErrorMessage = "Required")]
+       
         public int PackageId { get; set; }
 
         public TripTypes TripType { get; set; }
